@@ -1,6 +1,8 @@
 package ir.siriusapps.sview.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -10,6 +12,8 @@ import android.graphics.RectF;
 import android.os.Build;
 import android.util.AttributeSet;
 import androidx.annotation.Nullable;
+
+import ir.siriusapps.sview.R;
 import ir.siriusapps.sview.SView;
 import ir.siriusapps.sview.view.CornerView;
 
@@ -23,20 +27,27 @@ public class ImageView extends android.widget.ImageView implements CornerView {
 
     public ImageView(Context context) {
         super(context);
-        init();
+        init(null);
     }
 
     public ImageView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(attrs);
     }
 
     public ImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(attrs);
     }
 
-    private void init() {
+    @SuppressLint("CustomViewStyleable")
+    private void init(AttributeSet attrs) {
+        if (attrs != null) {
+            TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.SView);
+            cornerRadius = typedArray.getDimensionPixelSize(R.styleable.SView_sview_cornerRadius, cornerRadius);
+            typedArray.recycle();
+        }
+
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             setLayerType(LAYER_TYPE_SOFTWARE, null);
             setWillNotDraw(false);

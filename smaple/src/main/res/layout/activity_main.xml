@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ir.siriusapps.sview.widget.ImageView
+        android:id="@+id/imageView"
+        android:layout_width="94dp"
+        android:layout_height="94dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        app:sview_cornerRadius="-1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/avatar"/>
+
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
