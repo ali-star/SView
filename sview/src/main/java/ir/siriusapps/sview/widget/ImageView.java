@@ -72,7 +72,8 @@ public class ImageView extends android.widget.ImageView implements CornerView {
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-        SView.drawCorners(canvas, clipPath, clipPaint);
+        if (!isInEditMode())
+            SView.drawCorners(canvas, clipPath, clipPaint);
     }
 
     /*   Corners   */
