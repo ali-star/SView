@@ -13,14 +13,5 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        final RelativeLayout relativeLayout = findViewById(R.id.view);
-
-        findViewById(R.id.text).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                relativeLayout.setCorerRadius(70);
-            }
-        });
     }
 }

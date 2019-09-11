@@ -40,6 +40,7 @@ public class SView {
             view.setOutlineProvider(new ViewOutlineProvider() {
                 @Override
                 public void getOutline(View view, Outline outline) {
+                    outline.setAlpha(0);
                     int mCornerRadius = cornerRadius;
                     if (mCornerRadius < 0)
                         mCornerRadius = view.getHeight() / 2;
