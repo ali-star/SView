@@ -16,7 +16,10 @@
         app:sview_cornerRadius="-1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/avatar"/>
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:src="@drawable/avatar"
+        android:focusable="true" />
 
     <TextView
         android:id="@+id/text"
