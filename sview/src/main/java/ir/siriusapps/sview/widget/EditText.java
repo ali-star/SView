@@ -55,14 +55,6 @@ public class EditText extends android.widget.EditText implements CornerView {
         if (typefacePath != null)
             setTypeface(typefacePath);
 
-        if (getBackground() instanceof ColorDrawable) {
-            int backgroundColor = ((ColorDrawable) getBackground()).getColor();
-            setBackground(null);
-            setBackgroundColor(backgroundColor);
-        } else {
-            setBackground(null);
-        }
-
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             setLayerType(LAYER_TYPE_SOFTWARE, null);
             setWillNotDraw(false);
