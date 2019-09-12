@@ -17,13 +17,15 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewOutlineProvider;
+
 import androidx.annotation.Nullable;
+
 import ir.siriusapps.sview.R;
 import ir.siriusapps.sview.TypefaceManager;
 import ir.siriusapps.sview.view.CornerView;
 
 @SuppressLint("AppCompatCustomView")
-public class Button extends android.widget.Button implements CornerView {
+public class TextView extends android.widget.TextView implements CornerView {
 
     private Path basePath = new Path();
     private Paint clipPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -38,17 +40,17 @@ public class Button extends android.widget.Button implements CornerView {
 
     private String typefacePath;
 
-    public Button(Context context) {
+    public TextView(Context context) {
         super(context);
         init(null);
     }
 
-    public Button(Context context, @Nullable AttributeSet attrs) {
+    public TextView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(attrs);
     }
 
-    public Button(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public TextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs);
     }
