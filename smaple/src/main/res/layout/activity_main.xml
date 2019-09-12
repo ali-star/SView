@@ -34,13 +34,16 @@
     <ir.siriusapps.sview.widget.Button
         android:id="@+id/view"
         android:layout_width="200dp"
-        android:layout_height="74dp"
+        android:layout_height="48dp"
         android:layout_marginStart="104dp"
         android:layout_marginLeft="104dp"
         android:layout_marginTop="164dp"
+        android:background="@color/colorPrimary"
         android:text="Test"
         android:textColor="#FFFFFF"
         app:sview_cornerRadius="-1dp"
+        app:sview_shadowColor="#20000000"
+        app:sview_shadowSize="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 

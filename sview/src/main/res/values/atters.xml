@@ -3,6 +3,9 @@
 
     <declare-styleable name="SView">
         <attr name="sview_cornerRadius" format="dimension" />
+        <attr name="sview_shadowColor" format="color" />
+        <attr name="sview_shadowSize" format="dimension" />
+        <attr name="sview_shadowDy" format="dimension" />
     </declare-styleable>
 
 </resources>

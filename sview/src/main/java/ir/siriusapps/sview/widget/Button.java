@@ -11,6 +11,7 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
@@ -20,6 +21,7 @@ import ir.siriusapps.sview.R;
 import ir.siriusapps.sview.SView;
 import ir.siriusapps.sview.view.CornerView;
 
+@SuppressLint("AppCompatCustomView")
 public class Button extends android.widget.Button implements CornerView {
 
     private Path basePath = new Path();
@@ -30,6 +32,7 @@ public class Button extends android.widget.Button implements CornerView {
 
     private Paint basePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private Path shadowPath = new Path();
+    private int shadowColor = Color.parseColor("#80000000");
     private float shadowSize = 20;
     private float shadowDy = 10;
 
@@ -53,6 +56,9 @@ public class Button extends android.widget.Button implements CornerView {
         if (attrs != null) {
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.SView);
             cornerRadius = typedArray.getDimensionPixelSize(R.styleable.SView_sview_cornerRadius, cornerRadius);
+            shadowColor = typedArray.getColor(R.styleable.SView_sview_shadowColor, shadowColor);
+            shadowSize = typedArray.getDimensionPixelSize(R.styleable.SView_sview_shadowSize, (int) shadowSize);
+            shadowDy = typedArray.getDimensionPixelSize(R.styleable.SView_sview_shadowDy, (int) shadowDy);
             typedArray.recycle();
         }
 
@@ -61,14 +67,16 @@ public class Button extends android.widget.Button implements CornerView {
             setWillNotDraw(false);
         }
 
+        clipPaint.setXfermode(porterDuffXfermode);
+
+
+        if (getBackground() instanceof ColorDrawable) {
+            basePaint.setColor(((ColorDrawable) getBackground()).getColor());
+        }
+
         setBackground(null);
 
-        /*if (getBackground() instanceof ColorDrawable) {
-            basePaint.setColor(((ColorDrawable) getBackground()).getColor());
-        }*/
-
-        basePaint.setColor(Color.BLACK);
-        basePaint.setShadowLayer(shadowSize, 0, shadowDy, Color.parseColor("#3D72DE"));
+        basePaint.setShadowLayer(shadowSize, 0, shadowDy, shadowColor);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setClipToOutline(true);
@@ -79,38 +87,36 @@ public class Button extends android.widget.Button implements CornerView {
     protected void onSizeChanged(final int w, final int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        if (shadowSize > 0)
-            rectF.set(shadowSize, shadowSize - shadowDy, w - shadowSize, h - (shadowSize + shadowDy));
-        else
-            rectF.set(0, 0, w, h);
+        rectF.set(0, 0, w, h);
 
-        int mCornerRadius = cornerRadius;
+        float mCornerRadius = cornerRadius;
         if (mCornerRadius < 0)
-            mCornerRadius = h / 2;
+            mCornerRadius = rectF.bottom / 2;
 
         SView.makeRoundedCornersPath(basePath, rectF, mCornerRadius, mCornerRadius,
-                cornerRadius, cornerRadius);
+                mCornerRadius, mCornerRadius);
 
-        if (cornerRadius != 0)
-            setCorerRadius(cornerRadius);
+        setPadding((int) shadowSize, (int) (shadowSize - shadowDy), (int) shadowSize, (int) (shadowSize + shadowDy));
     }
 
 
     @Override
     public void draw(Canvas canvas) {
-        super.draw(canvas);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP || shadowSize > 0) {
             canvas.drawPath(basePath, basePaint);
         }
 
-        int saveCount = canvas.save();
-
-
         if (!isInEditMode()) {
-            clipPaint.setXfermode(porterDuffXfermode);
+
+            int saveCount = canvas.saveLayer(0, 0, getWidth(), getHeight(), null, Canvas.ALL_SAVE_FLAG);
+
+            super.draw(canvas);
+
+            Path.FillType fillType = basePath.getFillType();
+            basePath.setFillType(Path.FillType.INVERSE_WINDING);
             canvas.drawPath(basePath, clipPaint);
             canvas.restoreToCount(saveCount);
-            clipPaint.setXfermode(null);
+            basePath.setFillType(fillType);
         }
     }
 
