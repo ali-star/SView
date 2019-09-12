@@ -19,7 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
         /*ImageView imageView = findViewById(R.id.imageView2);
         SVG svg = SVGParser.getSVGFromResource(getResources(), R.raw.icon);
-        imageView.setImageDrawable(svg.createPictureDrawable());*/
+        imageView.setImageDrawable(svg.createPictureDrawable());
+        */
 
         final ImageView svgView = findViewById(R.id.imageView2);
         svgView.setSvgResource(R.raw.menu);
