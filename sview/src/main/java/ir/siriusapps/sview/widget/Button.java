@@ -186,9 +186,10 @@ public class Button extends android.widget.Button implements CornerView {
     public void setCorerRadius(int corerRadius) {
         this.cornerRadius = corerRadius;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            if (shadowSize > 0)
+            if (shadowSize > 0) {
                 setOutlineProvider(null);
-            else
+                requestLayout();
+            } else
                 setOutlineProvider(new ViewOutlineProvider() {
                     @Override
                     public void getOutline(View view, Outline outline) {
