@@ -33,8 +33,8 @@ public class TextView extends android.widget.TextView implements CornerView {
 
     private Paint basePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private int shadowColor = Color.parseColor("#80000000");
-    private float shadowSize = 20;
-    private float shadowDy = 10;
+    private float shadowSize;
+    private float shadowDy;
 
     private String typefacePath;
 
@@ -104,25 +104,30 @@ public class TextView extends android.widget.TextView implements CornerView {
                     (shadowSize - shadowDy) >= 0 ? (shadowSize - shadowDy) : 0,
                     w - shadowSize,
                     h - shadowSize - shadowDy);
-        else
+        else if (cornerRadius != 0) {
             rectF.set(0, 0, w, h);
 
-        float mCornerRadius = cornerRadius;
-        if (mCornerRadius < 0)
-            mCornerRadius = rectF.bottom / 2;
+            float mCornerRadius = cornerRadius;
+            if (mCornerRadius < 0)
+                mCornerRadius = rectF.bottom / 2;
 
-        basePath.reset();
-        basePath.addRoundRect(rectF, mCornerRadius, mCornerRadius, Path.Direction.CW);
+            basePath.reset();
+            basePath.addRoundRect(rectF, mCornerRadius, mCornerRadius, Path.Direction.CW);
+        }
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int desiredWidth = getSuggestedMinimumWidth() + getPaddingLeft() + getPaddingRight();
-        int desiredHeight = getSuggestedMinimumHeight() + getPaddingTop() + getPaddingBottom();
+        if (shadowSize > 0) {
+            int desiredWidth = getSuggestedMinimumWidth() + getPaddingLeft() + getPaddingRight();
+            int desiredHeight = getSuggestedMinimumHeight() + getPaddingTop() + getPaddingBottom();
 
-        setMeasuredDimension(
-                measureDimension(desiredWidth, widthMeasureSpec, (int) (shadowSize * 2)),
-                measureDimension(desiredHeight, heightMeasureSpec, (int) ((shadowSize * 2) + shadowDy)));
+            setMeasuredDimension(
+                    measureDimension(desiredWidth, widthMeasureSpec, (int) (shadowSize * 2)),
+                    measureDimension(desiredHeight, heightMeasureSpec, (int) ((shadowSize * 2) + shadowDy)));
+        } else {
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        }
     }
 
     private int measureDimension(int desiredSize, int measureSpec, int addedValue) {
