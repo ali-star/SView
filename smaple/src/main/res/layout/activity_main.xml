@@ -43,7 +43,7 @@
         android:textColor="#FFFFFF"
         app:sview_cornerRadius="-1dp"
         app:sview_shadowColor="#20000000"
-        app:sview_shadowSize="24dp"
+        app:sview_shadowSize="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 

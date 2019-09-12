@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewOutlineProvider;
 import androidx.annotation.Nullable;
 import ir.siriusapps.sview.R;
-import ir.siriusapps.sview.SView;
 import ir.siriusapps.sview.view.CornerView;
 
 @SuppressLint("AppCompatCustomView")
@@ -87,14 +86,16 @@ public class Button extends android.widget.Button implements CornerView {
     protected void onSizeChanged(final int w, final int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        rectF.set(0, 0, w, h);
+        if (shadowSize > 0)
+            rectF.set(shadowSize, (shadowSize - shadowDy) >= 0 ? (shadowSize - shadowDy) : 0, w - shadowSize, h - shadowSize - shadowDy);
+        else
+            rectF.set(0, 0, w, h);
 
         float mCornerRadius = cornerRadius;
         if (mCornerRadius < 0)
             mCornerRadius = rectF.bottom / 2;
 
-        SView.makeRoundedCornersPath(basePath, rectF, mCornerRadius, mCornerRadius,
-                mCornerRadius, mCornerRadius);
+        basePath.addRoundRect(rectF, mCornerRadius, mCornerRadius, Path.Direction.CW);
 
         setPadding((int) shadowSize, (int) (shadowSize - shadowDy), (int) shadowSize, (int) (shadowSize + shadowDy));
     }
