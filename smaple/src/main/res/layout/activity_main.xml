@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F1F5F9"
     tools:context=".MainActivity">
 
     <ir.siriusapps.sview.widget.ImageView
@@ -51,10 +52,26 @@
     </ir.siriusapps.sview.widget.Button>
 
     <View
+        android:id="@+id/view2"
         android:layout_width="100dp"
         android:layout_height="48dp"
         android:background="#000000"
         app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <ir.siriusapps.sview.widget.EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:padding="8dp"
+        android:inputType="textPersonName"
+        app:sview_cornerRadius="16dp"
+        android:text="Name"
+        app:layout_constraintEnd_toEndOf="@+id/view2"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
