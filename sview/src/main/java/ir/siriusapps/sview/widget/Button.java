@@ -14,6 +14,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import androidx.annotation.Nullable;
@@ -30,7 +31,6 @@ public class Button extends android.widget.Button implements CornerView {
     private int cornerRadius;
 
     private Paint basePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private Path shadowPath = new Path();
     private int shadowColor = Color.parseColor("#80000000");
     private float shadowSize = 20;
     private float shadowDy = 10;
@@ -80,6 +80,12 @@ public class Button extends android.widget.Button implements CornerView {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setClipToOutline(true);
         }
+
+        if (shadowSize > 0)
+            setPadding((int) shadowSize + getPaddingLeft(),
+                    (int) (shadowSize - shadowDy) + getPaddingTop(),
+                    (int) shadowSize + getPaddingRight(),
+                    (int) (shadowSize + shadowDy) + getPaddingBottom());
     }
 
     @Override
@@ -95,10 +101,64 @@ public class Button extends android.widget.Button implements CornerView {
         if (mCornerRadius < 0)
             mCornerRadius = rectF.bottom / 2;
 
+        basePath.reset();
         basePath.addRoundRect(rectF, mCornerRadius, mCornerRadius, Path.Direction.CW);
-
-        setPadding((int) shadowSize, (int) (shadowSize - shadowDy), (int) shadowSize, (int) (shadowSize + shadowDy));
     }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int desiredWidth = getSuggestedMinimumWidth() + getPaddingLeft() + getPaddingRight();
+        int desiredHeight = getSuggestedMinimumHeight() + getPaddingTop() + getPaddingBottom();
+
+        setMeasuredDimension(measureWidthDimension(desiredWidth, widthMeasureSpec),
+                measureHeightDimension(desiredHeight, heightMeasureSpec));
+    }
+
+    // region Measure Dimension
+    // thank's for Lorenzo Quiroli
+    // https://medium.com/@quiro91/custom-view-mastering-onmeasure-a0a0bb11784d
+    //-------------------------------------------------------------------
+    private int measureWidthDimension(int desiredSize, int measureSpec) {
+        int result;
+        int specMode = MeasureSpec.getMode(measureSpec);
+        int specSize = MeasureSpec.getSize(measureSpec);
+
+        if (specMode == MeasureSpec.EXACTLY) {
+            result = specSize;
+        } else {
+            result = desiredSize;
+            if (specMode == MeasureSpec.AT_MOST) {
+                result = Math.min(result, specSize);
+            }
+        }
+
+        if (result < desiredSize){
+            Log.e("ChartView", "The view is too small, the content might get cut");
+        }
+        return (int) (result + (shadowSize * 2));
+    }
+
+    private int measureHeightDimension(int desiredSize, int measureSpec) {
+        int result;
+        int specMode = MeasureSpec.getMode(measureSpec);
+        int specSize = MeasureSpec.getSize(measureSpec);
+
+        if (specMode == MeasureSpec.EXACTLY) {
+            result = specSize;
+        } else {
+            result = desiredSize;
+            if (specMode == MeasureSpec.AT_MOST) {
+                result = Math.min(result, specSize);
+            }
+        }
+
+        if (result < desiredSize){
+            Log.e("ChartView", "The view is too small, the content might get cut");
+        }
+        return (int) (result +(shadowSize * 2) + shadowDy);
+    }
+    //-------------------------------------------------------------------
+    // endregion
 
 
     @Override
