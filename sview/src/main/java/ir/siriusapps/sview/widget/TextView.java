@@ -17,9 +17,7 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewOutlineProvider;
-
 import androidx.annotation.Nullable;
-
 import ir.siriusapps.sview.R;
 import ir.siriusapps.sview.TypefaceManager;
 import ir.siriusapps.sview.view.CornerView;
