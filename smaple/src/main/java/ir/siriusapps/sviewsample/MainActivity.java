@@ -8,7 +8,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import ir.siriusapps.sview.widget.Button;
-import ir.siriusapps.sview.widget.SvgView;
+import ir.siriusapps.sview.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
         SVG svg = SVGParser.getSVGFromResource(getResources(), R.raw.icon);
         imageView.setImageDrawable(svg.createPictureDrawable());*/
 
-        final SvgView svgView = findViewById(R.id.imageView2);
-        svgView.setSvgResource(R.raw.android);
+        final ImageView svgView = findViewById(R.id.imageView2);
+        svgView.setSvgResource(R.raw.menu);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

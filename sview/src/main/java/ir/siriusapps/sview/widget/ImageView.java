@@ -3,15 +3,21 @@ package ir.siriusapps.sview.widget;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import androidx.annotation.Nullable;
+
+import com.caverock.androidsvg.RenderOptions;
+import com.caverock.androidsvg.SVG;
+import com.caverock.androidsvg.SVGParseException;
 
 import ir.siriusapps.sview.R;
 import ir.siriusapps.sview.SView;
@@ -24,6 +30,9 @@ public class ImageView extends android.widget.ImageView implements CornerView {
     private PorterDuffXfermode porterDuffXfermode = new PorterDuffXfermode(PorterDuff.Mode.CLEAR);
     private RectF rectF = new RectF();
     private int cornerRadius;
+
+    private int svgResource;
+    private int color;
 
     public ImageView(Context context) {
         super(context);
@@ -45,6 +54,8 @@ public class ImageView extends android.widget.ImageView implements CornerView {
         if (attrs != null) {
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.SView);
             cornerRadius = typedArray.getDimensionPixelSize(R.styleable.SView_sview_cornerRadius, cornerRadius);
+            color = typedArray.getColor(R.styleable.SView_sview_color, color);
+            svgResource = typedArray.getResourceId(R.styleable.SView_sview_res, svgResource);
             typedArray.recycle();
         }
 
@@ -63,6 +74,8 @@ public class ImageView extends android.widget.ImageView implements CornerView {
     @Override
     protected void onSizeChanged(final int w, final int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+
+        setDrawable();
 
         if (cornerRadius != 0)
             setCorerRadius(cornerRadius);
@@ -86,5 +99,41 @@ public class ImageView extends android.widget.ImageView implements CornerView {
     @Override
     public int getCornerRadius() {
         return cornerRadius;
+    }
+
+    /*   SvgDrawable   */
+    public void setSvgResource(int svgResource, int color) {
+        this.svgResource = svgResource;
+        this.color = color;
+        setDrawable();
+    }
+
+    public void setSvgResource(int svgResource) {
+        this.svgResource = svgResource;
+        setDrawable();
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+        setDrawable();
+    }
+
+    private void setDrawable() {
+        if (getWidth() <= 0 || getHeight() <= 0 || svgResource == 0)
+            return;
+        setImageDrawable(null);
+        SVG svg;
+        try {
+            svg = SVG.getFromResource(getContext(), svgResource);
+            Bitmap bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmap);
+            svg.setDocumentWidth(getWidth());
+            svg.setDocumentHeight(getHeight());
+            RenderOptions renderOpts = RenderOptions.create().css("path { fill: " + String.format("#%06X", (0xFFFFFF & color)) + "; }");
+            svg.renderToCanvas(canvas, renderOpts);
+            setImageDrawable(new BitmapDrawable(getResources(), bitmap));
+        } catch (SVGParseException e) {
+            e.printStackTrace();
+        }
     }
 }

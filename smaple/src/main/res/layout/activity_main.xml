@@ -74,12 +74,13 @@
         app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toBottomOf="@+id/view2" />
 
-    <ir.siriusapps.sview.widget.SvgView
+    <ir.siriusapps.sview.widget.ImageView
         android:id="@+id/imageView2"
         android:layout_width="215dp"
         android:layout_height="223dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
+        app:sview_res="@raw/menu"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/imageView"/>
