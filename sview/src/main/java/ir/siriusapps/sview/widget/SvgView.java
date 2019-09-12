@@ -4,15 +4,10 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.View;
 import androidx.annotation.Nullable;
-
 import com.caverock.androidsvg.RenderOptions;
 import com.caverock.androidsvg.SVG;
 import com.caverock.androidsvg.SVGParseException;
@@ -43,6 +38,7 @@ public class SvgView extends View {
         if (attrs != null) {
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.SView);
             color = typedArray.getColor(R.styleable.SView_sview_color, color);
+            svgResource = typedArray.getResourceId(R.styleable.SView_sview_res, svgResource);
             typedArray.recycle();
         }
     }
