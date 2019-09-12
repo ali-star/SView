@@ -9,11 +9,13 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.util.AttributeSet;
 
 import ir.siriusapps.sview.R;
 import ir.siriusapps.sview.SView;
+import ir.siriusapps.sview.TypefaceManager;
 import ir.siriusapps.sview.view.CornerView;
 
 public class EditText extends android.widget.EditText implements CornerView {
@@ -23,6 +25,7 @@ public class EditText extends android.widget.EditText implements CornerView {
     private PorterDuffXfermode porterDuffXfermode = new PorterDuffXfermode(PorterDuff.Mode.CLEAR);
     private RectF rectF = new RectF();
     private int cornerRadius;
+    private String typefacePath;
 
     public EditText(Context context) {
         super(context);
@@ -44,8 +47,12 @@ public class EditText extends android.widget.EditText implements CornerView {
         if (attrs != null) {
             TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.SView);
             cornerRadius = typedArray.getDimensionPixelSize(R.styleable.SView_sview_cornerRadius, cornerRadius);
+            typefacePath = typedArray.getString(R.styleable.SView_sview_typeface);
             typedArray.recycle();
         }
+
+        if (typefacePath != null)
+            setTypeface(typefacePath);
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             setLayerType(LAYER_TYPE_SOFTWARE, null);
@@ -83,5 +90,12 @@ public class EditText extends android.widget.EditText implements CornerView {
     @Override
     public int getCornerRadius() {
         return cornerRadius;
+    }
+
+    public void setTypeface(String path) {
+        if (path == null)
+            return;
+        Typeface typeface = TypefaceManager.getInstance().getTypeface(path, getContext());
+        setTypeface(typeface);
     }
 }
