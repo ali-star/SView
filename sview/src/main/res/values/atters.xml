@@ -6,6 +6,7 @@
         <attr name="sview_shadowColor" format="color" />
         <attr name="sview_shadowSize" format="dimension" />
         <attr name="sview_shadowDy" format="dimension" />
+        <attr name="sview_typeface" format="string" />
     </declare-styleable>
 
 </resources>

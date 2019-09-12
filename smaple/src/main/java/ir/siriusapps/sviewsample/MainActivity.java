@@ -1,7 +1,6 @@
 package ir.siriusapps.sviewsample;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import ir.siriusapps.sview.widget.Button;

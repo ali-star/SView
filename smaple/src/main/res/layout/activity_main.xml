@@ -38,14 +38,15 @@
         android:layout_marginTop="16dp"
         android:background="@color/colorPrimary"
         android:text="ورود"
-        android:paddingBottom="3.5dp"
+        android:paddingBottom="8dp"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/text"
         app:layout_constraintStart_toStartOf="@+id/text"
         app:layout_constraintTop_toBottomOf="@+id/text"
         app:sview_cornerRadius="-1dp"
         app:sview_shadowColor="#20000000"
-        app:sview_shadowSize="16dp">
+        app:sview_shadowSize="16dp"
+        android:textSize="23sp">
 
     </ir.siriusapps.sview.widget.Button>
 

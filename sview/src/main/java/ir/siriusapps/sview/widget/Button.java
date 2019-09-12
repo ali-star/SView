@@ -11,6 +11,7 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.ViewOutlineProvider;
 import androidx.annotation.Nullable;
 import ir.siriusapps.sview.R;
+import ir.siriusapps.sview.TypefaceManager;
 import ir.siriusapps.sview.view.CornerView;
 
 @SuppressLint("AppCompatCustomView")
@@ -34,6 +36,8 @@ public class Button extends android.widget.Button implements CornerView {
     private int shadowColor = Color.parseColor("#80000000");
     private float shadowSize = 20;
     private float shadowDy = 10;
+
+    private String typefacePath;
 
     public Button(Context context) {
         super(context);
@@ -58,8 +62,12 @@ public class Button extends android.widget.Button implements CornerView {
             shadowColor = typedArray.getColor(R.styleable.SView_sview_shadowColor, shadowColor);
             shadowSize = typedArray.getDimensionPixelSize(R.styleable.SView_sview_shadowSize, (int) shadowSize);
             shadowDy = typedArray.getDimensionPixelSize(R.styleable.SView_sview_shadowDy, (int) shadowDy);
+            typefacePath = typedArray.getString(R.styleable.SView_sview_typeface);
             typedArray.recycle();
         }
+
+        if (typefacePath != null)
+            setTypeface(typefacePath);
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP || shadowSize > 0) {
             setLayerType(LAYER_TYPE_SOFTWARE, null);
@@ -216,5 +224,12 @@ public class Button extends android.widget.Button implements CornerView {
     @Override
     public int getCornerRadius() {
         return cornerRadius;
+    }
+
+    public void setTypeface(String path) {
+        if (path == null)
+            return;
+        Typeface typeface = TypefaceManager.getInstance().getTypeface(path, getContext());
+        setTypeface(typeface);
     }
 }
