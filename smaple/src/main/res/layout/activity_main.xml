@@ -81,6 +81,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         app:sview_res="@raw/menu"
+        app:sview_resSize="48dp"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/imageView"/>

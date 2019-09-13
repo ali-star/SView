@@ -33,6 +33,7 @@ public class ImageView extends android.widget.ImageView implements CornerView {
 
     private int svgResource;
     private int color;
+    private int iconSize;
 
     public ImageView(Context context) {
         super(context);
@@ -56,6 +57,7 @@ public class ImageView extends android.widget.ImageView implements CornerView {
             cornerRadius = typedArray.getDimensionPixelSize(R.styleable.SView_sview_cornerRadius, cornerRadius);
             color = typedArray.getColor(R.styleable.SView_sview_color, color);
             svgResource = typedArray.getResourceId(R.styleable.SView_sview_res, svgResource);
+            iconSize = typedArray.getDimensionPixelSize(R.styleable.SView_sview_resSize, iconSize);
             typedArray.recycle();
         }
 
@@ -124,11 +126,15 @@ public class ImageView extends android.widget.ImageView implements CornerView {
         setImageDrawable(null);
         SVG svg;
         try {
+            if (iconSize == 0) {
+                iconSize = Math.min(getWidth(), getHeight());
+            }
             svg = SVG.getFromResource(getContext(), svgResource);
             Bitmap bitmap = Bitmap.createBitmap(getWidth(), getHeight(), Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(bitmap);
-            svg.setDocumentWidth(getWidth());
-            svg.setDocumentHeight(getHeight());
+            canvas.translate((getWidth() / 2) - (iconSize / 2), (getHeight() / 2) - (iconSize / 2));
+            svg.setDocumentWidth(iconSize);
+            svg.setDocumentHeight(iconSize);
             RenderOptions renderOpts = RenderOptions.create().css("path { fill: " + String.format("#%06X", (0xFFFFFF & color)) + "; }");
             svg.renderToCanvas(canvas, renderOpts);
             setImageDrawable(new BitmapDrawable(getResources(), bitmap));
