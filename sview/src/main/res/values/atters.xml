@@ -17,4 +17,11 @@
         <attr name="css" format="string"/>
     </declare-styleable>
 
+    <declare-styleable name="Loading">
+        <attr name="lv_backgroundStrokeWidth" format="dimension"/>
+        <attr name="lv_progressStrokeWidth" format="dimension"/>
+        <attr name="lv_progressColor" format="color"/>
+        <attr name="lv_backgroundStrokeColor" format="color"/>
+    </declare-styleable>
+
 </resources>
