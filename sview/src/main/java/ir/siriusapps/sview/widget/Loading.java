@@ -11,6 +11,10 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import androidx.annotation.Nullable;
+
+import com.daasuu.ei.Ease;
+import com.daasuu.ei.EasingInterpolator;
+
 import ir.siriusapps.sview.R;
 import ir.siriusapps.sview.Utils;
 
@@ -28,8 +32,8 @@ public class Loading extends View {
     private RectF rectF = new RectF();
 
     private float rotationAngle = 0;
-    private boolean userRotationAnimation = true;
-    private ValueAnimator animator;
+    private boolean userRotationAnimation = false;
+    private ValueAnimator rotateAnimator, progressAnimator;
     private boolean isAttached;
 
     public Loading(Context context) {
@@ -71,17 +75,17 @@ public class Loading extends View {
         progressStrokePaint.setColor(progressColor);
         progressStrokePaint.setStrokeCap(Paint.Cap.ROUND);
 
-        animator = ValueAnimator.ofFloat(0f, 360f);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+        rotateAnimator = ValueAnimator.ofFloat(0f, 360f);
+        rotateAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 rotationAngle = (float) animation.getAnimatedValue();
                 setRotation(rotationAngle);
             }
         });
-        animator.setRepeatCount(ValueAnimator.INFINITE);
-        animator.setInterpolator(new LinearInterpolator());
-        animator.setDuration(500);
+        rotateAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        rotateAnimator.setInterpolator(new LinearInterpolator());
+        rotateAnimator.setDuration(500);
     }
 
     @Override
@@ -100,43 +104,60 @@ public class Loading extends View {
         canvas.drawArc(rectF, -90, angle, false, progressStrokePaint);
     }
 
-    public void setProgress(float progress) {
-        this.progress = progress;
-        mode = Mode.PROGRESS;
-        invalidate();
+    public void setProgress(final float progress) {
+        if (progressAnimator == null) {
+            progressAnimator = ValueAnimator.ofFloat(this.progress, progress);
+            progressAnimator.setInterpolator(new EasingInterpolator(Ease.CUBIC_OUT));
+            progressAnimator.setDuration(500);
+            progressAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    Loading.this.progress = (float) animation.getAnimatedValue();
+                    invalidate();
+                }
+            });
+        } else {
+            progressAnimator.setFloatValues(this.progress, progress);
+        }
+        progressAnimator.start();
     }
 
-    public void roatiationAnimation(boolean rotationAnimation) {
+    public void rotationAnimation(boolean rotationAnimation) {
         this.userRotationAnimation = rotationAnimation;
+        if (rotationAnimation && isAttached && rotateAnimator != null)
+            rotateAnimator.start();
+        else if (rotateAnimator != null)
+            rotateAnimator.cancel();
+    }
+
+    public void setLoading() {
+        setProgress(25);
         mode = Mode.LOADING;
-        if (rotationAnimation && isAttached && animator != null)
-            animator.start();
-        else if (animator != null)
-            animator.cancel();
+        rotationAnimation(true);
     }
 
     @Override
     public void setVisibility(int visibility) {
         super.setVisibility(visibility);
-        if (mode == Mode.LOADING && visibility == VISIBLE && userRotationAnimation && animator != null)
-            animator.start();
-        else if (animator != null)
-            animator.cancel();
+        if (visibility == VISIBLE && userRotationAnimation && rotateAnimator != null)
+            rotateAnimator.start();
+        else if (rotateAnimator != null)
+            rotateAnimator.cancel();
     }
 
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         isAttached = true;
-        if (mode == Mode.LOADING && userRotationAnimation && animator != null)
-            animator.start();
+        if (userRotationAnimation && rotateAnimator != null)
+            rotateAnimator.start();
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        if (animator != null)
-            animator.cancel();
+        if (rotateAnimator != null)
+            rotateAnimator.cancel();
     }
 
     public enum Mode {

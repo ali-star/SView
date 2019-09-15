@@ -40,12 +40,24 @@ public class MainActivity extends AppCompatActivity {
 
         final Loading loading = findViewById(R.id.loadingView);
 
-        new Handler().postDelayed(new Runnable() {
+        final Handler handler = new Handler();
+
+        loading.setProgress(70);
+
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                loading.setProgress(70);
+                loading.setLoading();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loading.rotationAnimation(false);
+                        loading.setProgress((float) Math.floor(Math.random() * 100));
+                        handler.postDelayed(this, 3000);
+                    }
+                }, 3000);
             }
-        }, 3000);
+        }, 6000);
 
 
     }
