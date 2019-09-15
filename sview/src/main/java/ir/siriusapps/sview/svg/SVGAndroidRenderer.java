@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-package ir.siriusapps.sview.easeing.svg;
+package ir.siriusapps.sview.svg;
 
 
 import android.annotation.TargetApi;
@@ -40,39 +40,39 @@ import android.os.Build;
 import android.util.Base64;
 import android.util.Log;
 
-import ir.siriusapps.sview.easeing.svg.SVG.Box;
-import ir.siriusapps.sview.easeing.svg.SVG.ClipPath;
-import ir.siriusapps.sview.easeing.svg.SVG.Colour;
-import ir.siriusapps.sview.easeing.svg.SVG.CurrentColor;
-import ir.siriusapps.sview.easeing.svg.SVG.GradientElement;
-import ir.siriusapps.sview.easeing.svg.SVG.GradientSpread;
-import ir.siriusapps.sview.easeing.svg.SVG.Length;
-import ir.siriusapps.sview.easeing.svg.SVG.Line;
-import ir.siriusapps.sview.easeing.svg.SVG.Marker;
-import ir.siriusapps.sview.easeing.svg.SVG.NotDirectlyRendered;
-import ir.siriusapps.sview.easeing.svg.SVG.PaintReference;
-import ir.siriusapps.sview.easeing.svg.SVG.PathDefinition;
-import ir.siriusapps.sview.easeing.svg.SVG.PathInterface;
-import ir.siriusapps.sview.easeing.svg.SVG.Pattern;
-import ir.siriusapps.sview.easeing.svg.SVG.Rect;
-import ir.siriusapps.sview.easeing.svg.SVG.SolidColor;
-import ir.siriusapps.sview.easeing.svg.SVG.Stop;
-import ir.siriusapps.sview.easeing.svg.SVG.Style;
-import ir.siriusapps.sview.easeing.svg.SVG.Style.FontStyle;
-import ir.siriusapps.sview.easeing.svg.SVG.Style.RenderQuality;
-import ir.siriusapps.sview.easeing.svg.SVG.Style.TextAnchor;
-import ir.siriusapps.sview.easeing.svg.SVG.Style.TextDecoration;
-import ir.siriusapps.sview.easeing.svg.SVG.Style.VectorEffect;
-import ir.siriusapps.sview.easeing.svg.SVG.SvgContainer;
-import ir.siriusapps.sview.easeing.svg.SVG.SvgElement;
-import ir.siriusapps.sview.easeing.svg.SVG.SvgElementBase;
-import ir.siriusapps.sview.easeing.svg.SVG.SvgLinearGradient;
-import ir.siriusapps.sview.easeing.svg.SVG.SvgObject;
-import ir.siriusapps.sview.easeing.svg.SVG.SvgPaint;
-import ir.siriusapps.sview.easeing.svg.SVG.SvgRadialGradient;
-import ir.siriusapps.sview.easeing.svg.SVG.TextContainer;
-import ir.siriusapps.sview.easeing.svg.SVG.TextSequence;
-import ir.siriusapps.sview.easeing.svg.SVG.Unit;
+import ir.siriusapps.sview.svg.SVG.Box;
+import ir.siriusapps.sview.svg.SVG.ClipPath;
+import ir.siriusapps.sview.svg.SVG.Colour;
+import ir.siriusapps.sview.svg.SVG.CurrentColor;
+import ir.siriusapps.sview.svg.SVG.GradientElement;
+import ir.siriusapps.sview.svg.SVG.GradientSpread;
+import ir.siriusapps.sview.svg.SVG.Length;
+import ir.siriusapps.sview.svg.SVG.Line;
+import ir.siriusapps.sview.svg.SVG.Marker;
+import ir.siriusapps.sview.svg.SVG.NotDirectlyRendered;
+import ir.siriusapps.sview.svg.SVG.PaintReference;
+import ir.siriusapps.sview.svg.SVG.PathDefinition;
+import ir.siriusapps.sview.svg.SVG.PathInterface;
+import ir.siriusapps.sview.svg.SVG.Pattern;
+import ir.siriusapps.sview.svg.SVG.Rect;
+import ir.siriusapps.sview.svg.SVG.SolidColor;
+import ir.siriusapps.sview.svg.SVG.Stop;
+import ir.siriusapps.sview.svg.SVG.Style;
+import ir.siriusapps.sview.svg.SVG.Style.FontStyle;
+import ir.siriusapps.sview.svg.SVG.Style.RenderQuality;
+import ir.siriusapps.sview.svg.SVG.Style.TextAnchor;
+import ir.siriusapps.sview.svg.SVG.Style.TextDecoration;
+import ir.siriusapps.sview.svg.SVG.Style.VectorEffect;
+import ir.siriusapps.sview.svg.SVG.SvgContainer;
+import ir.siriusapps.sview.svg.SVG.SvgElement;
+import ir.siriusapps.sview.svg.SVG.SvgElementBase;
+import ir.siriusapps.sview.svg.SVG.SvgLinearGradient;
+import ir.siriusapps.sview.svg.SVG.SvgObject;
+import ir.siriusapps.sview.svg.SVG.SvgPaint;
+import ir.siriusapps.sview.svg.SVG.SvgRadialGradient;
+import ir.siriusapps.sview.svg.SVG.TextContainer;
+import ir.siriusapps.sview.svg.SVG.TextSequence;
+import ir.siriusapps.sview.svg.SVG.Unit;
 
 import java.util.ArrayList;
 import java.util.HashSet;

@@ -51,9 +51,22 @@ public class MainActivity extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        loading.rotationAnimation(false);
+                        loading.setUserRotationAnimationWithProgress(false);
                         loading.setProgress((float) Math.floor(Math.random() * 100));
-                        handler.postDelayed(this, 3000);
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                loading.setUserRotationAnimationWithProgress(true);
+                                handler.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        loading.setUserRotationAnimationWithProgress(false);
+                                        loading.setProgress((float) Math.floor(Math.random() * 100));
+                                        handler.postDelayed(this, 3000);
+                                    }
+                                }, 3000);
+                            }
+                        }, 3000);
                     }
                 }, 3000);
             }

@@ -14,32 +14,32 @@
    limitations under the License.
 */
 
-package ir.siriusapps.sview.easeing.svg;
+package ir.siriusapps.sview.svg;
 
 import android.graphics.Matrix;
 import android.util.Log;
 import android.util.Xml;
 
-import ir.siriusapps.sview.easeing.svg.CSSParser.MediaType;
-import ir.siriusapps.sview.easeing.svg.SVG.Box;
-import ir.siriusapps.sview.easeing.svg.SVG.CSSClipRect;
-import ir.siriusapps.sview.easeing.svg.SVG.Colour;
-import ir.siriusapps.sview.easeing.svg.SVG.CurrentColor;
-import ir.siriusapps.sview.easeing.svg.SVG.GradientSpread;
-import ir.siriusapps.sview.easeing.svg.SVG.Length;
-import ir.siriusapps.sview.easeing.svg.SVG.PaintReference;
-import ir.siriusapps.sview.easeing.svg.SVG.Style;
-import ir.siriusapps.sview.easeing.svg.SVG.Style.RenderQuality;
-import ir.siriusapps.sview.easeing.svg.SVG.Style.TextDecoration;
-import ir.siriusapps.sview.easeing.svg.SVG.Style.TextDirection;
-import ir.siriusapps.sview.easeing.svg.SVG.Style.VectorEffect;
-import ir.siriusapps.sview.easeing.svg.SVG.SvgElementBase;
-import ir.siriusapps.sview.easeing.svg.SVG.SvgObject;
-import ir.siriusapps.sview.easeing.svg.SVG.SvgPaint;
-import ir.siriusapps.sview.easeing.svg.SVG.TextChild;
-import ir.siriusapps.sview.easeing.svg.SVG.TextPositionedContainer;
-import ir.siriusapps.sview.easeing.svg.SVG.TextRoot;
-import ir.siriusapps.sview.easeing.svg.SVG.Unit;
+import ir.siriusapps.sview.svg.CSSParser.MediaType;
+import ir.siriusapps.sview.svg.SVG.Box;
+import ir.siriusapps.sview.svg.SVG.CSSClipRect;
+import ir.siriusapps.sview.svg.SVG.Colour;
+import ir.siriusapps.sview.svg.SVG.CurrentColor;
+import ir.siriusapps.sview.svg.SVG.GradientSpread;
+import ir.siriusapps.sview.svg.SVG.Length;
+import ir.siriusapps.sview.svg.SVG.PaintReference;
+import ir.siriusapps.sview.svg.SVG.Style;
+import ir.siriusapps.sview.svg.SVG.Style.RenderQuality;
+import ir.siriusapps.sview.svg.SVG.Style.TextDecoration;
+import ir.siriusapps.sview.svg.SVG.Style.TextDirection;
+import ir.siriusapps.sview.svg.SVG.Style.VectorEffect;
+import ir.siriusapps.sview.svg.SVG.SvgElementBase;
+import ir.siriusapps.sview.svg.SVG.SvgObject;
+import ir.siriusapps.sview.svg.SVG.SvgPaint;
+import ir.siriusapps.sview.svg.SVG.TextChild;
+import ir.siriusapps.sview.svg.SVG.TextPositionedContainer;
+import ir.siriusapps.sview.svg.SVG.TextRoot;
+import ir.siriusapps.sview.svg.SVG.Unit;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;

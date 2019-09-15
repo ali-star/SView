@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-package ir.siriusapps.sview.easeing.svg;
+package ir.siriusapps.sview.svg;
 
 /**
  * Parse a SVG 'number' or a CSS 'number' from a String.

@@ -32,9 +32,9 @@ public class Loading extends View {
     private RectF rectF = new RectF();
 
     private float rotationAngle = 0;
-    private boolean userRotationAnimation = false;
+    private boolean userRotationAnimation = true;
+    private boolean userRotationAnimationWithProgress = false;
     private ValueAnimator rotateAnimator, progressAnimator;
-    private boolean isAttached;
 
     public Loading(Context context) {
         super(context);
@@ -104,7 +104,18 @@ public class Loading extends View {
         canvas.drawArc(rectF, -90, angle, false, progressStrokePaint);
     }
 
-    public void setProgress(final float progress) {
+    public void setProgress(float progress) {
+        setProgress(progress, true);
+    }
+
+    private void setProgress(float progress, boolean changeRotationAnimation) {
+        mode = Mode.PROGRESS;
+        if (changeRotationAnimation) {
+            if (userRotationAnimationWithProgress && !rotateAnimator.isRunning())
+                setRotationAnimation(true);
+            else if (!userRotationAnimationWithProgress)
+                setRotationAnimation(false);
+        }
         if (progressAnimator == null) {
             progressAnimator = ValueAnimator.ofFloat(this.progress, progress);
             progressAnimator.setInterpolator(new EasingInterpolator(Ease.CUBIC_OUT));
@@ -122,9 +133,10 @@ public class Loading extends View {
         progressAnimator.start();
     }
 
-    public void rotationAnimation(boolean rotationAnimation) {
-        this.userRotationAnimation = rotationAnimation;
-        if (rotationAnimation && isAttached && rotateAnimator != null) {
+    public void setRotationAnimation(boolean rotationAnimation) {
+        userRotationAnimation = rotationAnimation;
+        if (rotationAnimation && getVisibility() == VISIBLE && rotateAnimator != null) {
+            rotateAnimator.setFloatValues(0f, 360f);
             rotateAnimator.setInterpolator(new LinearInterpolator());
             rotateAnimator.setRepeatCount(ValueAnimator.INFINITE);
             rotateAnimator.start();
@@ -140,9 +152,15 @@ public class Loading extends View {
     }
 
     public void setLoading() {
-        setProgress(25);
+        setProgress(25, false);
         mode = Mode.LOADING;
-        rotationAnimation(true);
+        setRotationAnimation(true);
+    }
+
+    public void setUserRotationAnimationWithProgress(boolean userRotationAnimationWithProgress) {
+        this.userRotationAnimationWithProgress = userRotationAnimationWithProgress;
+        if (mode == Mode.PROGRESS)
+            setRotationAnimation(userRotationAnimationWithProgress);
     }
 
     @Override
@@ -159,7 +177,6 @@ public class Loading extends View {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        isAttached = true;
         if (userRotationAnimation && rotateAnimator != null)
             rotateAnimator.start();
     }

@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-package ir.siriusapps.sview.easeing.svg;
+package ir.siriusapps.sview.svg;
 
 /*
  * Thrown by the CSS parser if a problem is found while parsing a CSS file.

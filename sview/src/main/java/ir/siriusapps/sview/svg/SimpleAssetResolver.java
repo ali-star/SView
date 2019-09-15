@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-package ir.siriusapps.sview.easeing.svg;
+package ir.siriusapps.sview.svg;
 
 import java.io.IOException;
 import java.io.InputStream;

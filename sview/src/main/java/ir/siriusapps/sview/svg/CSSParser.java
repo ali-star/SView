@@ -14,14 +14,14 @@
    limitations under the License.
 */
 
-package ir.siriusapps.sview.easeing.svg;
+package ir.siriusapps.sview.svg;
 
 import android.util.Log;
 
-import ir.siriusapps.sview.easeing.svg.SVG.SvgContainer;
-import ir.siriusapps.sview.easeing.svg.SVG.SvgElementBase;
-import ir.siriusapps.sview.easeing.svg.SVG.SvgObject;
-import ir.siriusapps.sview.easeing.svg.SVGParser.TextScanner;
+import ir.siriusapps.sview.svg.SVG.SvgContainer;
+import ir.siriusapps.sview.svg.SVG.SvgElementBase;
+import ir.siriusapps.sview.svg.SVG.SvgObject;
+import ir.siriusapps.sview.svg.SVGParser.TextScanner;
 
 import java.util.ArrayList;
 import java.util.HashMap;

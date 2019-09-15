@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-package ir.siriusapps.sview.easeing.svg;
+package ir.siriusapps.sview.svg;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -25,7 +25,7 @@ import android.graphics.Picture;
 import android.graphics.RectF;
 import android.util.Log;
 
-import ir.siriusapps.sview.easeing.svg.CSSParser.Ruleset;
+import ir.siriusapps.sview.svg.CSSParser.Ruleset;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
