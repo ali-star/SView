@@ -7,6 +7,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -186,4 +188,33 @@ public class Loading extends View {
         }
     }
 
+    @Nullable
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("superState", super.onSaveInstanceState());
+        bundle.putFloat("progress", progress);
+        bundle.putBoolean("userRotationAnimation", userRotationAnimation);
+        bundle.putInt("mode", mode.value);
+        bundle.putInt("progressColor", progressColor);
+        bundle.putInt("backgroundStrokeColor", backgroundStrokeColor);
+        bundle.putFloat("backgroundStrokeWidth", backgroundStrokeWidth);
+        bundle.putFloat("progressStrokeWidth", progressStrokeWidth);
+        return bundle;
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        if (state instanceof Bundle) {
+            Bundle bundle = (Bundle) state;
+            progress = bundle.getFloat("progress");
+            userRotationAnimation = bundle.getBoolean("userRotationAnimation");
+            mode = Mode.getByValue(bundle.getInt("mode"));
+            progressColor = bundle.getInt("progressColor");
+            backgroundStrokeColor = bundle.getInt("backgroundStrokeColor");
+            backgroundStrokeWidth = bundle.getFloat("backgroundStrokeWidth");
+            progressStrokeWidth = bundle.getFloat("progressStrokeWidth");
+        }
+        super.onRestoreInstanceState(state);
+    }
 }
