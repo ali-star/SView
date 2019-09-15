@@ -75,10 +75,12 @@
         app:layout_constraintTop_toBottomOf="@+id/view2" />
 
     <ir.siriusapps.sview.widget.Loading
+        android:id="@+id/loadingView"
         android:layout_width="48dp"
         android:layout_height="48dp"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:lv_mode="progress"/>
 
     <ir.siriusapps.sview.widget.ImageView
         android:id="@+id/imageView2"

@@ -20,6 +20,7 @@ public class Loading extends View {
     private int backgroundStrokeColor = Color.parseColor("#1AB9C0CB");
     private float backgroundStrokeWidth = Utils.dipToPix(2);
     private float progressStrokeWidth = Utils.dipToPix(4);
+    private Mode mode = Mode.LOADING;
     private float progress = 25;
 
     private Paint backgroundStrokePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -27,7 +28,7 @@ public class Loading extends View {
     private RectF rectF = new RectF();
 
     private float rotationAngle = 0;
-    private boolean rotationAnimation = true;
+    private boolean userRotationAnimation = true;
     private ValueAnimator animator;
     private boolean isAttached;
 
@@ -54,8 +55,11 @@ public class Loading extends View {
             backgroundStrokeColor = typedArray.getColor(R.styleable.Loading_lv_backgroundStrokeColor, backgroundStrokeColor);
             backgroundStrokeWidth = typedArray.getDimensionPixelSize(R.styleable.Loading_lv_backgroundStrokeWidth, (int) backgroundStrokeWidth);
             progressStrokeWidth = typedArray.getDimensionPixelSize(R.styleable.Loading_lv_progressStrokeWidth, (int) progressStrokeWidth);
+            mode = Mode.getByValue(typedArray.getInt(R.styleable.Loading_lv_mode, 0));
             typedArray.recycle();
         }
+
+        progress = mode == Mode.LOADING ? 25 : 0;
 
         backgroundStrokePaint.setStyle(Paint.Style.STROKE);
         backgroundStrokePaint.setStrokeWidth(backgroundStrokeWidth);
@@ -98,19 +102,23 @@ public class Loading extends View {
 
     public void setProgress(float progress) {
         this.progress = progress;
+        mode = Mode.PROGRESS;
         invalidate();
     }
 
     public void roatiationAnimation(boolean rotationAnimation) {
-        this.rotationAnimation = rotationAnimation;
+        this.userRotationAnimation = rotationAnimation;
+        mode = Mode.LOADING;
         if (rotationAnimation && isAttached && animator != null)
             animator.start();
+        else if (animator != null)
+            animator.cancel();
     }
 
     @Override
     public void setVisibility(int visibility) {
         super.setVisibility(visibility);
-        if (visibility == VISIBLE && rotationAnimation && animator != null)
+        if (mode == Mode.LOADING && visibility == VISIBLE && userRotationAnimation && animator != null)
             animator.start();
         else if (animator != null)
             animator.cancel();
@@ -120,7 +128,7 @@ public class Loading extends View {
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         isAttached = true;
-        if (rotationAnimation && animator != null)
+        if (mode == Mode.LOADING && userRotationAnimation && animator != null)
             animator.start();
     }
 
@@ -129,6 +137,23 @@ public class Loading extends View {
         super.onDetachedFromWindow();
         if (animator != null)
             animator.cancel();
+    }
+
+    public enum Mode {
+        LOADING(0), PROGRESS(1);
+
+        private int value;
+
+        Mode(int value) {
+            this.value = value;
+        }
+
+        static Mode getByValue(int value) {
+            for (Mode mode : values())
+                if (mode.value == value)
+                    return mode;
+            return LOADING;
+        }
     }
 
 }

@@ -4,11 +4,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import ir.siriusapps.sview.widget.Button;
 import ir.siriusapps.sview.widget.ImageView;
+import ir.siriusapps.sview.widget.Loading;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 svgView.setSvgResource(R.raw.icon, Color.parseColor("#999999"));
             }
-        }, 3000);
+        }, 1500);
 
         final Button button = findViewById(R.id.view);
         findViewById(R.id.view).setOnClickListener(new View.OnClickListener() {
@@ -38,6 +37,15 @@ public class MainActivity extends AppCompatActivity {
                 button.setCorerRadius(2);
             }
         });
+
+        final Loading loading = findViewById(R.id.loadingView);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loading.setProgress(70);
+            }
+        }, 3000);
 
 
     }
