@@ -1,4 +1,4 @@
-package com.daasuu.ei;
+package ir.siriusapps.sview.easeing;
 
 /**
  * The Easing class provides a collection of ease functions. It does not use the standard 4 param

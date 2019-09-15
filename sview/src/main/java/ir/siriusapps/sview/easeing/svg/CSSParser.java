@@ -14,14 +14,14 @@
    limitations under the License.
 */
 
-package com.caverock.androidsvg;
+package ir.siriusapps.sview.easeing.svg;
 
 import android.util.Log;
 
-import com.caverock.androidsvg.SVG.SvgContainer;
-import com.caverock.androidsvg.SVG.SvgElementBase;
-import com.caverock.androidsvg.SVG.SvgObject;
-import com.caverock.androidsvg.SVGParser.TextScanner;
+import ir.siriusapps.sview.easeing.svg.SVG.SvgContainer;
+import ir.siriusapps.sview.easeing.svg.SVG.SvgElementBase;
+import ir.siriusapps.sview.easeing.svg.SVG.SvgObject;
+import ir.siriusapps.sview.easeing.svg.SVGParser.TextScanner;
 
 import java.util.ArrayList;
 import java.util.HashMap;

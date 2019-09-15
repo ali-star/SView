@@ -14,10 +14,9 @@
    limitations under the License.
 */
 
-package com.caverock.androidsvg;
+package ir.siriusapps.sview.easeing.svg;
 
 import android.graphics.Canvas;
-import android.graphics.RectF;
 
 /**
  * A fluent builder class that creates a render configuration object for the

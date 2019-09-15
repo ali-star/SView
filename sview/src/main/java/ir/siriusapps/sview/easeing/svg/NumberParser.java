@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-package com.caverock.androidsvg;
+package ir.siriusapps.sview.easeing.svg;
 
 /**
  * Parse a SVG 'number' or a CSS 'number' from a String.

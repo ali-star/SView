@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-package com.caverock.androidsvg;
+package ir.siriusapps.sview.easeing.svg;
 
 import java.io.IOException;
 import java.io.InputStream;

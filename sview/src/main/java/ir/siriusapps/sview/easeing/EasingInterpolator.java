@@ -1,4 +1,4 @@
-package com.daasuu.ei;
+package ir.siriusapps.sview.easeing;
 
 import android.view.animation.Interpolator;
 

@@ -14,12 +14,21 @@
    limitations under the License.
 */
 
-package com.caverock.androidsvg;
+package ir.siriusapps.sview.easeing.svg;
 
-/**
- * Configure debugging on or off.
+/*
+ * Thrown by the CSS parser if a problem is found while parsing a CSS file.
  */
-class LibConfig
+
+class CSSParseException extends Exception
 {
-   static final boolean DEBUG = false;
+   CSSParseException(String msg)
+   {
+      super(msg);
+   }
+
+   CSSParseException(String msg, Exception cause)
+   {
+      super(msg, cause);
+   }
 }

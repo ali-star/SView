@@ -14,20 +14,22 @@
    limitations under the License.
 */
 
-package com.caverock.androidsvg;
+package ir.siriusapps.sview.easeing.svg;
 
-/*
- * Thrown by the CSS parser if a problem is found while parsing a CSS file.
+import org.xml.sax.SAXException;
+
+/**
+ * Thrown by the parser if a problem is found in the SVG file.
  */
 
-class CSSParseException extends Exception
+public class SVGParseException extends SAXException
 {
-   CSSParseException(String msg)
+   SVGParseException(String msg)
    {
       super(msg);
    }
 
-   CSSParseException(String msg, Exception cause)
+   SVGParseException(String msg, Exception cause)
    {
       super(msg, cause);
    }

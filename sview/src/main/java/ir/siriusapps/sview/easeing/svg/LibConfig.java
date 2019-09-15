@@ -14,23 +14,12 @@
    limitations under the License.
 */
 
-package com.caverock.androidsvg;
-
-import org.xml.sax.SAXException;
+package ir.siriusapps.sview.easeing.svg;
 
 /**
- * Thrown by the parser if a problem is found in the SVG file.
+ * Configure debugging on or off.
  */
-
-public class SVGParseException extends SAXException
+class LibConfig
 {
-   SVGParseException(String msg)
-   {
-      super(msg);
-   }
-
-   SVGParseException(String msg, Exception cause)
-   {
-      super(msg, cause);
-   }
+   static final boolean DEBUG = false;
 }

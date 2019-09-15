@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-package com.caverock.androidsvg;
+package ir.siriusapps.sview.easeing.svg;
 
 
 import android.annotation.TargetApi;
@@ -40,39 +40,39 @@ import android.os.Build;
 import android.util.Base64;
 import android.util.Log;
 
-import com.caverock.androidsvg.SVG.Box;
-import com.caverock.androidsvg.SVG.ClipPath;
-import com.caverock.androidsvg.SVG.Colour;
-import com.caverock.androidsvg.SVG.CurrentColor;
-import com.caverock.androidsvg.SVG.GradientElement;
-import com.caverock.androidsvg.SVG.GradientSpread;
-import com.caverock.androidsvg.SVG.Length;
-import com.caverock.androidsvg.SVG.Line;
-import com.caverock.androidsvg.SVG.Marker;
-import com.caverock.androidsvg.SVG.NotDirectlyRendered;
-import com.caverock.androidsvg.SVG.PaintReference;
-import com.caverock.androidsvg.SVG.PathDefinition;
-import com.caverock.androidsvg.SVG.PathInterface;
-import com.caverock.androidsvg.SVG.Pattern;
-import com.caverock.androidsvg.SVG.Rect;
-import com.caverock.androidsvg.SVG.SolidColor;
-import com.caverock.androidsvg.SVG.Stop;
-import com.caverock.androidsvg.SVG.Style;
-import com.caverock.androidsvg.SVG.Style.FontStyle;
-import com.caverock.androidsvg.SVG.Style.RenderQuality;
-import com.caverock.androidsvg.SVG.Style.TextAnchor;
-import com.caverock.androidsvg.SVG.Style.TextDecoration;
-import com.caverock.androidsvg.SVG.Style.VectorEffect;
-import com.caverock.androidsvg.SVG.SvgContainer;
-import com.caverock.androidsvg.SVG.SvgElement;
-import com.caverock.androidsvg.SVG.SvgElementBase;
-import com.caverock.androidsvg.SVG.SvgLinearGradient;
-import com.caverock.androidsvg.SVG.SvgObject;
-import com.caverock.androidsvg.SVG.SvgPaint;
-import com.caverock.androidsvg.SVG.SvgRadialGradient;
-import com.caverock.androidsvg.SVG.TextContainer;
-import com.caverock.androidsvg.SVG.TextSequence;
-import com.caverock.androidsvg.SVG.Unit;
+import ir.siriusapps.sview.easeing.svg.SVG.Box;
+import ir.siriusapps.sview.easeing.svg.SVG.ClipPath;
+import ir.siriusapps.sview.easeing.svg.SVG.Colour;
+import ir.siriusapps.sview.easeing.svg.SVG.CurrentColor;
+import ir.siriusapps.sview.easeing.svg.SVG.GradientElement;
+import ir.siriusapps.sview.easeing.svg.SVG.GradientSpread;
+import ir.siriusapps.sview.easeing.svg.SVG.Length;
+import ir.siriusapps.sview.easeing.svg.SVG.Line;
+import ir.siriusapps.sview.easeing.svg.SVG.Marker;
+import ir.siriusapps.sview.easeing.svg.SVG.NotDirectlyRendered;
+import ir.siriusapps.sview.easeing.svg.SVG.PaintReference;
+import ir.siriusapps.sview.easeing.svg.SVG.PathDefinition;
+import ir.siriusapps.sview.easeing.svg.SVG.PathInterface;
+import ir.siriusapps.sview.easeing.svg.SVG.Pattern;
+import ir.siriusapps.sview.easeing.svg.SVG.Rect;
+import ir.siriusapps.sview.easeing.svg.SVG.SolidColor;
+import ir.siriusapps.sview.easeing.svg.SVG.Stop;
+import ir.siriusapps.sview.easeing.svg.SVG.Style;
+import ir.siriusapps.sview.easeing.svg.SVG.Style.FontStyle;
+import ir.siriusapps.sview.easeing.svg.SVG.Style.RenderQuality;
+import ir.siriusapps.sview.easeing.svg.SVG.Style.TextAnchor;
+import ir.siriusapps.sview.easeing.svg.SVG.Style.TextDecoration;
+import ir.siriusapps.sview.easeing.svg.SVG.Style.VectorEffect;
+import ir.siriusapps.sview.easeing.svg.SVG.SvgContainer;
+import ir.siriusapps.sview.easeing.svg.SVG.SvgElement;
+import ir.siriusapps.sview.easeing.svg.SVG.SvgElementBase;
+import ir.siriusapps.sview.easeing.svg.SVG.SvgLinearGradient;
+import ir.siriusapps.sview.easeing.svg.SVG.SvgObject;
+import ir.siriusapps.sview.easeing.svg.SVG.SvgPaint;
+import ir.siriusapps.sview.easeing.svg.SVG.SvgRadialGradient;
+import ir.siriusapps.sview.easeing.svg.SVG.TextContainer;
+import ir.siriusapps.sview.easeing.svg.SVG.TextSequence;
+import ir.siriusapps.sview.easeing.svg.SVG.Unit;
 
 import java.util.ArrayList;
 import java.util.HashSet;

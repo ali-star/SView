@@ -13,8 +13,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import androidx.annotation.Nullable;
-import com.daasuu.ei.Ease;
-import com.daasuu.ei.EasingInterpolator;
+import ir.siriusapps.sview.easeing.Ease;
+import ir.siriusapps.sview.easeing.EasingInterpolator;
 import ir.siriusapps.sview.R;
 import ir.siriusapps.sview.Utils;
 
