@@ -11,10 +11,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 import androidx.annotation.Nullable;
-
 import com.daasuu.ei.Ease;
 import com.daasuu.ei.EasingInterpolator;
-
 import ir.siriusapps.sview.R;
 import ir.siriusapps.sview.Utils;
 
@@ -124,10 +122,19 @@ public class Loading extends View {
 
     public void rotationAnimation(boolean rotationAnimation) {
         this.userRotationAnimation = rotationAnimation;
-        if (rotationAnimation && isAttached && rotateAnimator != null)
+        if (rotationAnimation && isAttached && rotateAnimator != null) {
+            rotateAnimator.setInterpolator(new LinearInterpolator());
+            rotateAnimator.setRepeatCount(ValueAnimator.INFINITE);
             rotateAnimator.start();
-        else if (rotateAnimator != null)
+        } else if (rotateAnimator != null) {
             rotateAnimator.cancel();
+            rotateAnimator.setFloatValues(getRotation(), 0f);
+            rotateAnimator.setRepeatCount(0);
+            rotateAnimator.setInterpolator(new EasingInterpolator(Ease.CUBIC_OUT));
+            rotateAnimator.start();
+        } else {
+            setRotation(0);
+        }
     }
 
     public void setLoading() {
@@ -141,8 +148,10 @@ public class Loading extends View {
         super.setVisibility(visibility);
         if (visibility == VISIBLE && userRotationAnimation && rotateAnimator != null)
             rotateAnimator.start();
-        else if (rotateAnimator != null)
+        else if (rotateAnimator != null) {
             rotateAnimator.cancel();
+            setRotation(0);
+        }
     }
 
     @Override
