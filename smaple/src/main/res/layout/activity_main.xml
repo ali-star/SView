@@ -94,20 +94,23 @@
         app:sview_res="@raw/menu"
         app:sview_resSize="48dp" />
 
-    <ir.siriusapps.sview.ShapeView
-        android:id="@+id/textView"
+    <ir.siriusapps.sview.widget.ArcLayout
+        android:id="@+id/shapeView"
         android:layout_width="0dp"
-        android:layout_height="86dp"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/loadingView"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/loadingView">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loadingView"
+        app:al_arcDirection="top"
+        app:al_arcSize="74dp">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorPrimaryDark" />
 
-    </ir.siriusapps.sview.ShapeView>
+    </ir.siriusapps.sview.widget.ArcLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

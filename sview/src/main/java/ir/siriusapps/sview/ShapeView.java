@@ -12,7 +12,7 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
-public class ShapeView extends RelativeLayout {
+public abstract class ShapeView extends RelativeLayout {
 
     private Path clipPath = new Path();
     private Paint clipPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -20,49 +20,43 @@ public class ShapeView extends RelativeLayout {
 
     public ShapeView(Context context) {
         super(context);
-        init(null);
+        init();
     }
 
     public ShapeView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(attrs);
+        init();
     }
 
     public ShapeView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(attrs);
+        init();
     }
 
     @SuppressLint("CustomViewStyleable")
-    private void init(AttributeSet attrs) {
-        if (attrs != null) {
-            TypedArray typedArray = getContext().obtainStyledAttributes(R.styleable.SView);
-            typedArray.recycle();
-        }
-
-        setLayerType(LAYER_TYPE_SOFTWARE, null);
+    private void init() {
+        setLayerType(LAYER_TYPE_HARDWARE, null);
         setWillNotDraw(false);
 
         clipPath.setFillType(Path.FillType.INVERSE_WINDING);
         clipPaint.setXfermode(porterDuffXfermode);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-            setClipToOutline(true);
     }
 
-    protected Path getClipPath(int width, int height) {
-        float arcHeight = Utils.dipToPix(16);
-        clipPath.moveTo(0, 0);
-        clipPath.lineTo(0, height - arcHeight);
-        clipPath.quadTo(width / 2, height + arcHeight, width, height - arcHeight);
-        clipPath.lineTo(width, 0);
-        clipPath.close();
+    protected abstract void initClipPath();
+
+    public Path getClipPath() {
         return clipPath;
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        initClipPath();
     }
 
     @Override
     public void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
-        canvas.drawPath(getClipPath(getWidth(), getHeight()), clipPaint);
+        canvas.drawPath(clipPath, clipPaint);
     }
 }

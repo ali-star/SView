@@ -14,11 +14,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import androidx.annotation.Nullable;
-
 import ir.siriusapps.sview.svg.RenderOptions;
 import ir.siriusapps.sview.svg.SVG;
 import ir.siriusapps.sview.svg.SVGParseException;
-
 import ir.siriusapps.sview.R;
 import ir.siriusapps.sview.SView;
 import ir.siriusapps.sview.view.CornerView;

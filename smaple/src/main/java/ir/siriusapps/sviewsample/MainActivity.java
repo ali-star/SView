@@ -1,10 +1,13 @@
 package ir.siriusapps.sviewsample;
 
+import android.animation.ValueAnimator;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
+import ir.siriusapps.sview.Utils;
+import ir.siriusapps.sview.widget.ArcLayout;
 import ir.siriusapps.sview.widget.Button;
 import ir.siriusapps.sview.widget.ImageView;
 import ir.siriusapps.sview.widget.Loading;
@@ -20,6 +23,20 @@ public class MainActivity extends AppCompatActivity {
         SVG svg = SVGParser.getSVGFromResource(getResources(), R.raw.icon);
         imageView.setImageDrawable(svg.createPictureDrawable());
         */
+
+        /*final ArcLayout arcLayout = findViewById(R.id.shapeView);
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, Utils.dipToPix(120));
+        valueAnimator.setDuration(800);
+        valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
+        valueAnimator.setRepeatMode(ValueAnimator.REVERSE);
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                arcLayout.setArcSize((Float) animation.getAnimatedValue());
+            }
+        });
+        valueAnimator.start();*/
+
 
         final ImageView svgView = findViewById(R.id.imageView2);
         svgView.setSvgResource(R.raw.menu);

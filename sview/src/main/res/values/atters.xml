@@ -28,4 +28,14 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="ArcLayout">
+        <attr name="al_arcSize" format="dimension"/>
+        <attr name="al_arcDirection" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="top" value="1"/>
+            <enum name="right" value="2"/>
+            <enum name="bottom" value="3"/>
+        </attr>
+    </declare-styleable>
+
 </resources>
