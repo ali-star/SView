@@ -18,8 +18,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-
 import ir.siriusapps.sview.R;
 import ir.siriusapps.sview.TypefaceManager;
 import ir.siriusapps.sview.view.CornerView;
@@ -112,7 +110,7 @@ public class Button extends android.widget.Button implements CornerView {
                     shadowSize,
                     (shadowSize - shadowDy) >= 0 ? (shadowSize - shadowDy) : 0,
                     w - shadowSize,
-                    h - shadowSize - shadowDy);
+                    h - (shadowSize + shadowDy));
         else
             rectF.set(0, 0, w, h);
 
@@ -129,9 +127,17 @@ public class Button extends android.widget.Button implements CornerView {
         int desiredWidth = getSuggestedMinimumWidth() + getPaddingLeft() + getPaddingRight();
         int desiredHeight = getSuggestedMinimumHeight() + getPaddingTop() + getPaddingBottom();
 
+        int heightMeasure;
+
+        if (shadowDy != 0 && shadowSize >= shadowDy) {
+            heightMeasure = (int) (shadowSize + shadowDy);
+        } else {
+            heightMeasure = (int) ((shadowSize * 2) + shadowDy);
+        }
+
         setMeasuredDimension(
                 measureDimension(desiredWidth, widthMeasureSpec, (int) (shadowSize * 2)),
-                measureDimension(desiredHeight, heightMeasureSpec, (int) ((shadowSize * 2) + shadowDy)));
+                measureDimension(desiredHeight, heightMeasureSpec, heightMeasure));
     }
 
     private int measureDimension(int desiredSize, int measureSpec, int addedValue) {
