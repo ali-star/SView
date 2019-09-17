@@ -129,8 +129,10 @@ public class Button extends android.widget.Button implements CornerView {
 
         int heightMeasure;
 
-        if (shadowDy != 0 && shadowSize >= shadowDy) {
+        if (shadowDy != 0 && shadowSize == shadowDy) {
             heightMeasure = (int) (shadowSize + shadowDy);
+        } else if (shadowDy != 0 && shadowSize >= shadowDy) {
+            heightMeasure = (int) (shadowSize + (shadowDy) * 2);
         } else {
             heightMeasure = (int) ((shadowSize * 2) + shadowDy);
         }

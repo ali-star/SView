@@ -47,7 +47,7 @@
         app:sview_cornerRadius="-1dp"
         app:sview_shadowColor="#20000000"
         app:sview_shadowSize="16dp"
-        app:sview_shadowDy="16dp"
+        app:sview_shadowDy="8dp"
         android:textSize="23sp">
 
     </ir.siriusapps.sview.widget.Button>
