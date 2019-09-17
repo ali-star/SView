@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         valueAnimator.start();*/
 
         BlurBackgroundImageView imageView = findViewById(R.id.imageView3);
-        imageView.setImageBitmap(Utils.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.app_profile), Utils.dipToPix(500)));
+        imageView.setImageBitmap(Utils.getCircularBitmapFrom(BitmapFactory.decodeResource(getResources(), R.drawable.app_profile)));
 
 
         final ImageView svgView = findViewById(R.id.imageView2);

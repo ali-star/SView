@@ -2,12 +2,14 @@ package ir.siriusapps.sview;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.util.TypedValue;
 
 public class Utils {
@@ -27,25 +29,26 @@ public class Utils {
                 Resources.getSystem().getDisplayMetrics());
     }
 
-    public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, int cornerRadius) {
-        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap
-                .getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(output);
-
-        final int color = 0xff424242;
-        final Paint paint = new Paint();
-        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-        final RectF rectF = new RectF(rect);
-
+    public static Bitmap getCircularBitmapFrom(Bitmap bitmap) {
+        if (bitmap == null || bitmap.isRecycled()) {
+            return null;
+        }
+        float radius = bitmap.getWidth() > bitmap.getHeight() ? ((float) bitmap
+                .getHeight()) / 2f : ((float) bitmap.getWidth()) / 2f;
+        Bitmap canvasBitmap = Bitmap.createBitmap(bitmap.getWidth(),
+                bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.CLAMP,
+                Shader.TileMode.CLAMP);
+        Paint paint = new Paint();
         paint.setAntiAlias(true);
-        canvas.drawARGB(0, 0, 0, 0);
-        paint.setColor(color);
-        canvas.drawRoundRect(rectF, (float) cornerRadius, (float) cornerRadius, paint);
+        paint.setShader(shader);
 
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(bitmap, rect, rect, paint);
+        Canvas canvas = new Canvas(canvasBitmap);
 
-        return output;
+        canvas.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2,
+                radius, paint);
+
+        return canvasBitmap;
     }
 
 }

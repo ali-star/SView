@@ -24,7 +24,7 @@ public class BlurBackgroundImageView extends ImageView {
 
     private static float BRIGHTNESS = -25f;
     private static float SATURATION = 1.3f;
-    float radius = 7f;
+    float radius = 10f;
 
     public BlurBackgroundImageView(Context context) {
         super(context);
@@ -46,7 +46,7 @@ public class BlurBackgroundImageView extends ImageView {
 
         setScaleType(ScaleType.CENTER_CROP);
 
-        int padding = Utils.dipToPix(28);
+        int padding = Utils.dipToPix(32);
         setPadding(padding, padding, padding, padding);
     }
 
