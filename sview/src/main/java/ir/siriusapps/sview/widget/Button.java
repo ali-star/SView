@@ -18,6 +18,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewOutlineProvider;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+
 import ir.siriusapps.sview.R;
 import ir.siriusapps.sview.TypefaceManager;
 import ir.siriusapps.sview.view.CornerView;
@@ -68,10 +70,8 @@ public class Button extends android.widget.Button implements CornerView {
         if (typefacePath != null)
             setTypeface(typefacePath);
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP || shadowSize > 0) {
-            setLayerType(LAYER_TYPE_SOFTWARE, null);
-            setWillNotDraw(false);
-        }
+        setLayerType(LAYER_TYPE_SOFTWARE, null);
+        setWillNotDraw(false);
 
         clipPaint.setXfermode(porterDuffXfermode);
 
@@ -79,19 +79,28 @@ public class Button extends android.widget.Button implements CornerView {
             basePaint.setColor(((ColorDrawable) getBackground()).getColor());
         }
 
-        setBackground(null);
-
-        basePaint.setShadowLayer(shadowSize, 0, shadowDy, shadowColor);
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setClipToOutline(true);
+            setOutlineProvider(new ViewOutlineProvider() {
+                @Override
+                public void getOutline(View view, Outline outline) {
+                    outline.setAlpha(0);
+                    int mCornerRadius = cornerRadius;
+                    if (mCornerRadius < 0)
+                        mCornerRadius = view.getHeight() / 2;
+                    outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), mCornerRadius);
+                }
+            });
         }
 
-        if (shadowSize > 0)
+        if (shadowSize > 0) {
+            setBackground(null);
+            basePaint.setShadowLayer(shadowSize, 0, shadowDy, shadowColor);
             setPadding((int) shadowSize + getPaddingLeft(),
                     (int) (shadowSize - shadowDy) + getPaddingTop(),
                     (int) shadowSize + getPaddingRight(),
                     (int) (shadowSize + shadowDy) + getPaddingBottom());
+        }
     }
 
     @Override
@@ -147,19 +156,20 @@ public class Button extends android.widget.Button implements CornerView {
     public void draw(Canvas canvas) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP || shadowSize > 0) {
             canvas.drawPath(basePath, basePaint);
-        }
 
-        if (!isInEditMode()) {
-            int saveCount = canvas.saveLayer(0, 0, getWidth(), getHeight(), null, Canvas.ALL_SAVE_FLAG);
+            if (!isInEditMode()) {
+                int saveCount = canvas.saveLayer(0, 0, getWidth(), getHeight(), null, Canvas.ALL_SAVE_FLAG);
 
+                super.draw(canvas);
+
+                Path.FillType fillType = basePath.getFillType();
+                basePath.setFillType(Path.FillType.INVERSE_WINDING);
+                canvas.drawPath(basePath, clipPaint);
+                canvas.restoreToCount(saveCount);
+                basePath.setFillType(fillType);
+            }
+        } else
             super.draw(canvas);
-
-            Path.FillType fillType = basePath.getFillType();
-            basePath.setFillType(Path.FillType.INVERSE_WINDING);
-            canvas.drawPath(basePath, clipPaint);
-            canvas.restoreToCount(saveCount);
-            basePath.setFillType(fillType);
-        }
     }
 
     /*   Corners   */
@@ -170,7 +180,7 @@ public class Button extends android.widget.Button implements CornerView {
             if (shadowSize > 0) {
                 setOutlineProvider(null);
                 requestLayout();
-            } else
+            } else {
                 setOutlineProvider(new ViewOutlineProvider() {
                     @Override
                     public void getOutline(View view, Outline outline) {
@@ -181,6 +191,7 @@ public class Button extends android.widget.Button implements CornerView {
                         outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), mCornerRadius);
                     }
                 });
+            }
         } else
             requestLayout();
     }
