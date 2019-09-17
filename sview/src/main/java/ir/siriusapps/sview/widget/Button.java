@@ -33,8 +33,8 @@ public class Button extends android.widget.Button implements CornerView {
 
     private Paint basePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private int shadowColor = Color.parseColor("#80000000");
-    private float shadowSize = 20;
-    private float shadowDy = 10;
+    private float shadowSize = 0;
+    private float shadowDy = 0;
 
     private String typefacePath;
 
