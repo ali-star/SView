@@ -1,13 +1,13 @@
 package ir.siriusapps.sviewsample;
 
-import android.animation.ValueAnimator;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import ir.siriusapps.sview.Utils;
-import ir.siriusapps.sview.widget.ArcLayout;
+import ir.siriusapps.sview.widget.BlurBackgroundImageView;
 import ir.siriusapps.sview.widget.Button;
 import ir.siriusapps.sview.widget.ImageView;
 import ir.siriusapps.sview.widget.Loading;
@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         valueAnimator.start();*/
+
+        BlurBackgroundImageView imageView = findViewById(R.id.imageView3);
+        imageView.setImageBitmap(Utils.getRoundedCornerBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.app_profile), Utils.dipToPix(500)));
 
 
         final ImageView svgView = findViewById(R.id.imageView2);

@@ -5,11 +5,13 @@ android {
     buildToolsVersion "29.0.0"
     defaultConfig {
         applicationId "ir.siriusapps.sview"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        renderscriptTargetApi 28
+        renderscriptSupportModeEnabled true
     }
     buildTypes {
         release {
