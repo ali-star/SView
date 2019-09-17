@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewOutlineProvider;
 import androidx.annotation.Nullable;
 import ir.siriusapps.sview.R;
+import ir.siriusapps.sview.SView;
 import ir.siriusapps.sview.TypefaceManager;
 import ir.siriusapps.sview.view.CornerView;
 
@@ -138,25 +139,8 @@ public class Button extends android.widget.Button implements CornerView {
         }
 
         setMeasuredDimension(
-                measureDimension(desiredWidth, widthMeasureSpec, (int) (shadowSize * 2)),
-                measureDimension(desiredHeight, heightMeasureSpec, heightMeasure));
-    }
-
-    private int measureDimension(int desiredSize, int measureSpec, int addedValue) {
-        int result;
-        int specMode = MeasureSpec.getMode(measureSpec);
-        int specSize = MeasureSpec.getSize(measureSpec);
-
-        if (specMode == MeasureSpec.EXACTLY) {
-            result = specSize;
-        } else {
-            result = desiredSize;
-            if (specMode == MeasureSpec.AT_MOST) {
-                result = Math.min(result, specSize);
-            }
-        }
-
-        return result + addedValue;
+                SView.measureDimension(desiredWidth, widthMeasureSpec, (int) (shadowSize * 2)),
+                SView.measureDimension(desiredHeight, heightMeasureSpec, heightMeasure));
     }
 
 

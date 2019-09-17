@@ -20,6 +20,9 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         android:clickable="true"
         android:src="@drawable/avatar"
+        app:sview_shadowColor="#20000000"
+        app:sview_shadowSize="16dp"
+        app:sview_shadowDy="8dp"
         android:focusable="true" />
 
     <ir.siriusapps.sview.widget.TextView

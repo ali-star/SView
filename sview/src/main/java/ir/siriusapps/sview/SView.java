@@ -40,4 +40,22 @@ public class SView {
             canvas.drawPath(clipPath, clipPaint);
     }
 
+
+    public static int measureDimension(int desiredSize, int measureSpec, int addedValue) {
+        int result;
+        int specMode = View.MeasureSpec.getMode(measureSpec);
+        int specSize = View.MeasureSpec.getSize(measureSpec);
+
+        if (specMode == View.MeasureSpec.EXACTLY) {
+            result = specSize;
+        } else {
+            result = desiredSize;
+            if (specMode == View.MeasureSpec.AT_MOST) {
+                result = Math.min(result, specSize);
+            }
+        }
+
+        return result + addedValue;
+    }
+
 }
