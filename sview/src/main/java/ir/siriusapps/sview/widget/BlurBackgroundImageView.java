@@ -24,7 +24,7 @@ public class BlurBackgroundImageView extends ImageView {
 
     private static float BRIGHTNESS = -25f;
     private static float SATURATION = 1.3f;
-    float radius = 10f;
+    private float blurRadius = 10f;
 
     public BlurBackgroundImageView(Context context) {
         super(context);
@@ -111,7 +111,7 @@ public class BlurBackgroundImageView extends ImageView {
     private void makeBlurShadow() {
         if (getWidth() == 0 || getHeight() == 0)
             return;
-        Bitmap blur = blur(radius);
+        Bitmap blur = blur(blurRadius);
         ColorMatrix colorMatrix = new ColorMatrix(new float[]{
                 1f, 0f, 0f, 0f, BRIGHTNESS,
                 0f, 1f, 0f, 0f, BRIGHTNESS,
@@ -152,4 +152,14 @@ public class BlurBackgroundImageView extends ImageView {
         return bitmap;
     }
 
+    public void setBlurRadius(float blurRadius) {
+        this.blurRadius = blurRadius;
+        if (getDrawable() != null)
+            setBlurShadow(new Fun() {
+                @Override
+                public void call() {
+                    setImageDrawable(getDrawable());
+                }
+            });
+    }
 }

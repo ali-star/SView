@@ -37,9 +37,14 @@ public class MainActivity extends AppCompatActivity {
         });
         valueAnimator.start();*/
 
-        BlurBackgroundImageView imageView = findViewById(R.id.imageView3);
+        final BlurBackgroundImageView imageView = findViewById(R.id.imageView3);
         imageView.setImageBitmap(Utils.getCircularBitmapFrom(BitmapFactory.decodeResource(getResources(), R.drawable.app_profile)));
-
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageView.setBlurRadius(10f);
+            }
+        });
 
         final ImageView svgView = findViewById(R.id.imageView2);
         svgView.setSvgResource(R.raw.menu);
