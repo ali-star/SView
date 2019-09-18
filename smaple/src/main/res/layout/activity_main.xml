@@ -37,21 +37,19 @@
 
     <ir.siriusapps.sview.widget.Button
         android:id="@+id/view"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
         android:background="@color/colorPrimary"
-        android:text="ورود"
         android:paddingBottom="8dp"
+        android:text="ورود"
         android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="@+id/text"
-        app:layout_constraintStart_toStartOf="@+id/text"
+        android:textSize="23sp"
+        app:layout_constraintEnd_toStartOf="@+id/text"
         app:layout_constraintTop_toBottomOf="@+id/text"
         app:sview_cornerRadius="-1dp"
         app:sview_shadowColor="#20000000"
-        app:sview_shadowSize="16dp"
         app:sview_shadowDy="8dp"
-        android:textSize="23sp">
+        app:sview_shadowSize="16dp">
 
     </ir.siriusapps.sview.widget.Button>
 
@@ -115,5 +113,23 @@
         android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <ir.siriusapps.sview.widget.Button
+        android:id="@+id/loginButton"
+        android:layout_width="250dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/colorPrimary"
+        android:onClick="@{() -> viewmodel.login()}"
+        android:text="login"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:sview_cornerRadius="10dp"
+        app:sview_shadowColor="#40000000"
+        app:sview_shadowDy="3dp"
+        app:sview_shadowSize="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

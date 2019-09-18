@@ -128,19 +128,9 @@ public class Button extends android.widget.Button implements CornerView {
         int desiredWidth = getSuggestedMinimumWidth() + getPaddingLeft() + getPaddingRight();
         int desiredHeight = getSuggestedMinimumHeight() + getPaddingTop() + getPaddingBottom();
 
-        int heightMeasure;
-
-        if (shadowDy != 0 && shadowSize == shadowDy) {
-            heightMeasure = (int) (shadowSize + shadowDy);
-        } else if (shadowDy != 0 && shadowSize >= shadowDy) {
-            heightMeasure = (int) (shadowSize + (shadowDy) * 2);
-        } else {
-            heightMeasure = (int) ((shadowSize * 2) + shadowDy);
-        }
-
         setMeasuredDimension(
-                SView.measureDimension(desiredWidth, widthMeasureSpec, (int) (shadowSize * 2)),
-                SView.measureDimension(desiredHeight, heightMeasureSpec, heightMeasure));
+                SView.measureDimension(desiredWidth, widthMeasureSpec, (int) ((shadowSize * 2))),
+                SView.measureDimension(desiredHeight, heightMeasureSpec, (int) ((shadowSize - shadowDy) + shadowSize + shadowDy)));
     }
 
 
