@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.renderscript.Allocation;
@@ -22,9 +23,11 @@ public class BlurBackgroundImageView extends ImageView {
 
     private RenderScript renderScript;
 
-    private static float BRIGHTNESS = -25f;
-    private static float SATURATION = 1.3f;
+    private float brightness = -25f;
+    private float saturation = 1.0f;
     private float blurRadius = 10f;
+    private int blurAlpha = 255;
+    private float blurTopOffset = Utils.dipToPix(6);
 
     public BlurBackgroundImageView(Context context) {
         super(context);
@@ -46,7 +49,7 @@ public class BlurBackgroundImageView extends ImageView {
 
         setScaleType(ScaleType.CENTER_CROP);
 
-        int padding = Utils.dipToPix(32);
+        int padding = Utils.dipToPix(74);
         setPadding(padding, padding, padding, padding);
     }
 
@@ -111,13 +114,13 @@ public class BlurBackgroundImageView extends ImageView {
     private void makeBlurShadow() {
         if (getWidth() == 0 || getHeight() == 0)
             return;
-        Bitmap blur = blur(blurRadius);
+        Bitmap blur = blur(blurRadius, blurAlpha);
         ColorMatrix colorMatrix = new ColorMatrix(new float[]{
-                1f, 0f, 0f, 0f, BRIGHTNESS,
-                0f, 1f, 0f, 0f, BRIGHTNESS,
-                0f, 0f, 1f, 0f, BRIGHTNESS,
+                1f, 0f, 0f, 0f, brightness,
+                0f, 1f, 0f, 0f, brightness,
+                0f, 0f, 1f, 0f, brightness,
                 0f, 0f, 0f, 1f, 0f});
-        colorMatrix.setSaturation(SATURATION);
+        colorMatrix.setSaturation(saturation);
 
         setColorFilter(new ColorMatrixColorFilter(colorMatrix));
 
@@ -125,8 +128,8 @@ public class BlurBackgroundImageView extends ImageView {
         setBackground(background);
     }
 
-    private Bitmap blur(float radius) {
-        Bitmap src = getBitmapForView(0.25f);
+    private Bitmap blur(float radius, int blurAlpha) {
+        Bitmap src = getBitmapForView(0.25f, blurAlpha);
         Allocation input = Allocation.createFromBitmap(renderScript, src);
         Allocation output = Allocation.createTyped(renderScript, input.getType());
         ScriptIntrinsicBlur script = ScriptIntrinsicBlur.create(renderScript, Element.U8_4(renderScript));
@@ -137,7 +140,7 @@ public class BlurBackgroundImageView extends ImageView {
         return src;
     }
 
-    private Bitmap getBitmapForView(float downScale) {
+    private Bitmap getBitmapForView(float downScale, int blurAlpha) {
         Bitmap bitmap = Bitmap.createBitmap(
                 (int) (getWidth() * downScale),
                 (int) ((getHeight()) * downScale),
@@ -147,19 +150,90 @@ public class BlurBackgroundImageView extends ImageView {
         Matrix matrix = new Matrix();
         matrix.preScale(downScale, downScale);
         canvas.setMatrix(matrix);
-        canvas.translate(0, Utils.dipToPix(6));
+        canvas.translate(0, blurTopOffset);
         draw(canvas);
+        int color = (blurAlpha & 0xFF) << 24;
+        canvas.drawColor(color, PorterDuff.Mode.DST_IN);
         return bitmap;
     }
 
-    public void setBlurRadius(float blurRadius) {
+    public void setBlurRadius(float blurRadius, boolean updateDrawable) {
         this.blurRadius = blurRadius;
-        if (getDrawable() != null)
+        if (updateDrawable && getDrawable() != null)
             setBlurShadow(new Fun() {
                 @Override
                 public void call() {
                     setImageDrawable(getDrawable());
                 }
             });
+
+    }
+
+    public void setBlurRadius(float blurRadius) {
+        setBlurRadius(blurRadius, true);
+    }
+
+    public void setBrightness(float brightness, boolean updateDrawable) {
+        this.brightness = brightness;
+        if (updateDrawable && getDrawable() != null)
+            setBlurShadow(new Fun() {
+                @Override
+                public void call() {
+                    setImageDrawable(getDrawable());
+                }
+            });
+    }
+
+    public void setBrightness(float brightness) {
+        setBrightness(brightness, true);
+    }
+
+    public void setSaturation(float saturation, boolean updateDrawable) {
+        this.saturation = saturation;
+        if (updateDrawable && getDrawable() != null)
+            setBlurShadow(new Fun() {
+                @Override
+                public void call() {
+                    setImageDrawable(getDrawable());
+                }
+            });
+    }
+
+    public void setSaturation(float saturation) {
+        setSaturation(saturation, true);
+    }
+
+    public void setBlurAlpha(int blurAlpha, boolean updateDrawable) {
+        this.blurAlpha = blurAlpha;
+        if (updateDrawable && getDrawable() != null)
+            setBlurShadow(new Fun() {
+                @Override
+                public void call() {
+                    setImageDrawable(getDrawable());
+                }
+            });
+    }
+
+    public void setBlurAlpha(int blurAlpha) {
+        setBlurAlpha(blurAlpha, true);
+    }
+
+    public void setBlurTopOffset(float blurTopOffset, boolean updateDrawable) {
+        this.blurTopOffset = blurTopOffset;
+        if (updateDrawable && getDrawable() != null)
+            setBlurShadow(new Fun() {
+                @Override
+                public void call() {
+                    setImageDrawable(getDrawable());
+                }
+            });
+    }
+
+    public void setBlurTopOffset(float blurTopOffset) {
+        setBlurTopOffset(blurTopOffset, true);
+    }
+
+    public void setPadding(int padding) {
+        setPadding(padding, padding, padding, padding);
     }
 }

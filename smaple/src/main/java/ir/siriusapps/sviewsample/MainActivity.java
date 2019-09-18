@@ -42,7 +42,10 @@ public class MainActivity extends AppCompatActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imageView.setBlurRadius(10f);
+                int padding = Utils.dipToPix(86);
+                imageView.setPadding(padding);
+                imageView.setBlurRadius(15f, false);
+                imageView.setBlurAlpha(255, true);
             }
         });
 
