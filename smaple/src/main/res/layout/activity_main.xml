@@ -68,5 +68,10 @@
         app:sview_shadowDy="5dp"
         app:sview_shadowSize="12dp">
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"/>
+
     </ir.siriusapps.sview.widget.RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
