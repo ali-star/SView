@@ -1,6 +1,8 @@
 package ir.siriusapps.sview.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
@@ -19,6 +21,7 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import ir.siriusapps.sview.Utils;
 
+@SuppressLint("AppCompatCustomView")
 public class BlurBackgroundImageView extends ImageView {
 
     private RenderScript renderScript;
@@ -114,7 +117,12 @@ public class BlurBackgroundImageView extends ImageView {
     private void makeBlurShadow() {
         if (getWidth() == 0 || getHeight() == 0)
             return;
-        Bitmap blur = blur(blurRadius, blurAlpha);
+        float mBlurRadius = (blurRadius * Resources.getSystem().getDisplayMetrics().density) / 25f;
+        if (mBlurRadius > 25f)
+            mBlurRadius = 25f;
+        else if (mBlurRadius < 1f)
+            mBlurRadius = 1f;
+        Bitmap blur = blur(mBlurRadius, blurAlpha);
         ColorMatrix colorMatrix = new ColorMatrix(new float[]{
                 1f, 0f, 0f, 0f, brightness,
                 0f, 1f, 0f, 0f, brightness,
