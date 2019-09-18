@@ -23,6 +23,7 @@ import androidx.annotation.Nullable;
 import ir.siriusapps.sview.R;
 import ir.siriusapps.sview.SView;
 import ir.siriusapps.sview.TypefaceManager;
+import ir.siriusapps.sview.Utils;
 import ir.siriusapps.sview.view.CornerView;
 
 public class RelativeLayout extends android.widget.RelativeLayout implements CornerView {
@@ -123,8 +124,14 @@ public class RelativeLayout extends android.widget.RelativeLayout implements Cor
 
         int widthSize = MeasureSpec.getSize(widthMeasureSpec) + (int) shadowSize * 2;
 
+        int i = Utils.dipToPix(74);
+        int w = MeasureSpec.getSize(widthMeasureSpec);
+        int h = MeasureSpec.getSize(heightMeasureSpec);
+
+        String hs = String.valueOf(h);
+
         int topOffset = (int) (shadowSize - shadowDy);
-        int heightSize = (MeasureSpec.getSize(heightMeasureSpec) + (int) ((topOffset > 0 ? topOffset : 0) + shadowSize + shadowDy));
+        int heightSize = h + (int) ((topOffset > 0 ? topOffset : 0) + shadowSize + shadowDy);
 
         widthMeasureSpec = MeasureSpec.makeMeasureSpec(widthSize, MeasureSpec.EXACTLY);
         heightMeasureSpec = MeasureSpec.makeMeasureSpec(heightSize, MeasureSpec.EXACTLY);
