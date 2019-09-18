@@ -118,15 +118,19 @@ public class RelativeLayout extends android.widget.RelativeLayout implements Cor
         basePath.addRoundRect(rectF, mCornerRadius, mCornerRadius, Path.Direction.CW);
     }
 
-    /*@Override
+    @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int desiredWidth = getSuggestedMinimumWidth() + getPaddingLeft() + getPaddingRight();
-        int desiredHeight = getSuggestedMinimumHeight() + getPaddingTop() + getPaddingBottom();
 
-        setMeasuredDimension(
-                SView.measureDimension(desiredWidth, widthMeasureSpec, (int) ((shadowSize * 2))),
-                SView.measureDimension(desiredHeight, heightMeasureSpec, (int) ((shadowSize - shadowDy) + shadowSize + shadowDy)));
-    }*/
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec) + (int) shadowSize * 2;
+
+        int topOffset = (int) (shadowSize - shadowDy);
+        int heightSize = (MeasureSpec.getSize(heightMeasureSpec) + (int) ((topOffset > 0 ? topOffset : 0) + shadowSize + shadowDy));
+
+        widthMeasureSpec = MeasureSpec.makeMeasureSpec(widthSize, MeasureSpec.EXACTLY);
+        heightMeasureSpec = MeasureSpec.makeMeasureSpec(heightSize, MeasureSpec.EXACTLY);
+
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
 
 
     @Override
