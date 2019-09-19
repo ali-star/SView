@@ -38,4 +38,30 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="GradientView">
+        <attr name="gradientStartColor" format="color"/>
+        <attr name="gradientEndColor" format="color"/>
+        <attr name="gradientStart" format="enum">
+            <enum name="Top" value="0"/>
+            <enum name="Right" value="1"/>
+            <enum name="Bottom" value="2"/>
+            <enum name="Left" value="3"/>
+            <enum name="TopLeft" value="4"/>
+            <enum name="TopRight" value="5"/>
+            <enum name="BottomLeft" value="6"/>
+            <enum name="BottomRight" value="7"/>
+        </attr>
+        <attr name="gradientEnd" format="enum">
+            <enum name="Top" value="0"/>
+            <enum name="Right" value="1"/>
+            <enum name="Bottom" value="2"/>
+            <enum name="Left" value="3"/>
+            <enum name="TopLeft" value="4"/>
+            <enum name="TopRight" value="5"/>
+            <enum name="BottomLeft" value="6"/>
+            <enum name="BottomRight" value="7"/>
+        </attr>
+
+    </declare-styleable>
+
 </resources>
