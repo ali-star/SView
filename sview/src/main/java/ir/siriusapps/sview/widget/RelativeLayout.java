@@ -3,6 +3,8 @@ package ir.siriusapps.sview.widget;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Outline;
@@ -12,6 +14,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
@@ -65,9 +68,6 @@ public class RelativeLayout extends android.widget.RelativeLayout implements Cor
             typedArray.recycle();
         }
 
-        setLayerType(LAYER_TYPE_SOFTWARE, null);
-        setWillNotDraw(false);
-
         clipPaint.setXfermode(porterDuffXfermode);
 
         if (getBackground() instanceof ColorDrawable) {
@@ -117,6 +117,11 @@ public class RelativeLayout extends android.widget.RelativeLayout implements Cor
 
         basePath.reset();
         basePath.addRoundRect(rectF, mCornerRadius, mCornerRadius, Path.Direction.CW);
+
+        Bitmap bitmap = Bitmap.createBitmap(w, h, Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        canvas.drawPath(basePath, basePaint);
+        setBackground(new BitmapDrawable(getResources(), bitmap));
     }
 
     @Override
@@ -143,8 +148,6 @@ public class RelativeLayout extends android.widget.RelativeLayout implements Cor
     @Override
     public void dispatchDraw(Canvas canvas) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP || shadowSize > 0) {
-            canvas.drawPath(basePath, basePaint);
-
             if (!isInEditMode()) {
                 int saveCount = canvas.saveLayer(0, 0, getWidth(), getHeight(), null, Canvas.ALL_SAVE_FLAG);
 
@@ -188,7 +191,8 @@ public class RelativeLayout extends android.widget.RelativeLayout implements Cor
     public void setBackgroundColor(int color) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP || shadowSize > 0) {
             basePaint.setColor(color);
-            invalidate();
+            if (getWidth() != 0 || getHeight() != 0)
+                requestLayout();
         } else
             super.setBackgroundColor(color);
     }

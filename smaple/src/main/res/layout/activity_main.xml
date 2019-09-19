@@ -8,32 +8,6 @@
     tools:context=".MainActivity">
 
     <ir.siriusapps.sview.widget.RelativeLayout
-        android:layout_width="120dp"
-        android:layout_height="74dp"
-        android:background="#FFFFFF"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
-        app:sview_cornerRadius="16dp"
-        app:sview_shadowColor="#1A354C7A"
-        app:sview_shadowDy="5dp"
-        app:sview_shadowSize="12dp">
-
-    </ir.siriusapps.sview.widget.RelativeLayout>
-
-    <ir.siriusapps.sview.widget.RelativeLayout
-        android:layout_width="120dp"
-        android:layout_height="74dp"
-        android:background="#FFFFFF"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-        app:sview_cornerRadius="16dp"
-        app:sview_shadowColor="#1A354C7A"
-        app:sview_shadowDy="5dp"
-        app:sview_shadowSize="12dp">
-
-    </ir.siriusapps.sview.widget.RelativeLayout>
-
-    <ir.siriusapps.sview.widget.RelativeLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="120dp"
         android:layout_height="74dp"
@@ -69,10 +43,15 @@
         app:sview_shadowDy="5dp"
         app:sview_shadowSize="12dp">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimary" />
+        <ir.siriusapps.sview.widget.TextView
+            android:id="@+id/textView"
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:background="#000000"
+            android:layout_marginBottom="16dp"
+            android:text="TextView"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"/>
 
     </ir.siriusapps.sview.widget.RelativeLayout>
 
