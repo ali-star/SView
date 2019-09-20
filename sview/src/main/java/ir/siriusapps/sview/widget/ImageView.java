@@ -27,6 +27,7 @@ import ir.siriusapps.sview.R;
 import ir.siriusapps.sview.SView;
 import ir.siriusapps.sview.view.CornerView;
 
+@SuppressLint("AppCompatCustomView")
 public class ImageView extends android.widget.ImageView implements CornerView {
 
     private Path basePath = new Path();
@@ -69,6 +70,7 @@ public class ImageView extends android.widget.ImageView implements CornerView {
             shadowDy = typedArray.getDimensionPixelSize(R.styleable.SView_sview_shadowDy, (int) shadowDy);
             svgResource = typedArray.getResourceId(R.styleable.SView_sview_res, svgResource);
             iconSize = typedArray.getDimensionPixelSize(R.styleable.SView_sview_resSize, iconSize);
+            color = typedArray.getColor(R.styleable.SView_sview_color, color);
             typedArray.recycle();
         }
 
