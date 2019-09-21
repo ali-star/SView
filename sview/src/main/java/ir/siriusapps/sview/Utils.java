@@ -18,8 +18,8 @@ public class Utils {
         return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
     }
 
-    public static int spToPix(float sp) {
-        return (int) TypedValue.applyDimension(
+    public static float spToPix(float sp) {
+        return TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_SP,
                 sp,
                 Resources.getSystem().getDisplayMetrics());
