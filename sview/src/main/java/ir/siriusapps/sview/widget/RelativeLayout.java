@@ -126,22 +126,25 @@ public class RelativeLayout extends android.widget.RelativeLayout implements Cor
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        if (shadowSize > 0) {
+            int widthSize = MeasureSpec.getSize(widthMeasureSpec) + (int) shadowSize * 2;
 
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec) + (int) shadowSize * 2;
+            int i = Utils.dipToPix(74);
+            int w = MeasureSpec.getSize(widthMeasureSpec);
+            int h = MeasureSpec.getSize(heightMeasureSpec);
 
-        int i = Utils.dipToPix(74);
-        int w = MeasureSpec.getSize(widthMeasureSpec);
-        int h = MeasureSpec.getSize(heightMeasureSpec);
+            String hs = String.valueOf(h);
 
-        String hs = String.valueOf(h);
+            int topOffset = (int) (shadowSize - shadowDy);
+            int heightSize = h + (int) ((topOffset > 0 ? topOffset : 0) + shadowSize + shadowDy);
 
-        int topOffset = (int) (shadowSize - shadowDy);
-        int heightSize = h + (int) ((topOffset > 0 ? topOffset : 0) + shadowSize + shadowDy);
+            widthMeasureSpec = MeasureSpec.makeMeasureSpec(widthSize, MeasureSpec.EXACTLY);
+            heightMeasureSpec = MeasureSpec.makeMeasureSpec(heightSize, MeasureSpec.EXACTLY);
 
-        widthMeasureSpec = MeasureSpec.makeMeasureSpec(widthSize, MeasureSpec.EXACTLY);
-        heightMeasureSpec = MeasureSpec.makeMeasureSpec(heightSize, MeasureSpec.EXACTLY);
-
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        } else {
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        }
     }
 
 
