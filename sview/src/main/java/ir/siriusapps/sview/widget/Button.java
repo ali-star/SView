@@ -161,7 +161,9 @@ public class Button extends android.widget.Button implements CornerView {
             }
         } else
             super.draw(canvas);
-        canvas.drawPath(basePath, strokePaint);
+
+        if (strokeWidth > 0)
+            canvas.drawPath(basePath, strokePaint);
     }
 
     /*   Corners   */

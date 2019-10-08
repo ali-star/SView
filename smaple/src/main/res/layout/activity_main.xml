@@ -34,21 +34,20 @@
 
     <ir.siriusapps.sview.widget.Button
         android:id="@+id/view"
-        android:layout_width="48dp"
+        android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:background="@color/colorPrimary"
-        android:text="ورود"
         android:paddingBottom="8dp"
+        android:text="ورود"
         android:textColor="#FFFFFF"
+        android:textSize="23sp"
         app:layout_constraintEnd_toEndOf="@+id/text"
         app:layout_constraintStart_toStartOf="@+id/text"
         app:layout_constraintTop_toBottomOf="@+id/text"
-        app:sview_cornerRadius="-1dp"
-        app:sview_shadowColor="#20000000"
-        app:sview_shadowSize="16dp"
-        app:sview_shadowDy="8dp"
-        android:textSize="23sp">
+        app:sview_cornerRadius="8dp"
+        app:sview_strokeColor="#000000"
+        app:sview_strokeWidth="3dp">
 
     </ir.siriusapps.sview.widget.Button>
 
