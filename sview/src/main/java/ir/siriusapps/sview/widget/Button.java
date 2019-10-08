@@ -33,9 +33,12 @@ public class Button extends android.widget.Button implements CornerView {
     private int cornerRadius;
 
     private Paint basePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Paint strokePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private int shadowColor = Color.parseColor("#80000000");
     private float shadowSize = 0;
     private float shadowDy = 0;
+    private int strokeWidth = 0;
+    private int strokeColor = Color.BLACK;
 
     private String typefacePath;
 
@@ -62,6 +65,8 @@ public class Button extends android.widget.Button implements CornerView {
             shadowColor = typedArray.getColor(R.styleable.SView_sview_shadowColor, shadowColor);
             shadowSize = typedArray.getDimensionPixelSize(R.styleable.SView_sview_shadowSize, (int) shadowSize);
             shadowDy = typedArray.getDimensionPixelSize(R.styleable.SView_sview_shadowDy, (int) shadowDy);
+            strokeColor = typedArray.getColor(R.styleable.SView_sview_strokeColor, strokeColor);
+            strokeWidth = typedArray.getDimensionPixelSize(R.styleable.SView_sview_strokeWidth, strokeWidth);
             typefacePath = typedArray.getString(R.styleable.SView_sview_typeface);
             typedArray.recycle();
         }
@@ -91,6 +96,10 @@ public class Button extends android.widget.Button implements CornerView {
                 }
             });
         }
+
+        strokePaint.setColor(strokeColor);
+        strokePaint.setStyle(Paint.Style.STROKE);
+        strokePaint.setStrokeWidth(strokeWidth);
 
         if (shadowSize > 0) {
             setBackground(null);
@@ -152,6 +161,7 @@ public class Button extends android.widget.Button implements CornerView {
             }
         } else
             super.draw(canvas);
+        canvas.drawPath(basePath, strokePaint);
     }
 
     /*   Corners   */

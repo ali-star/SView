@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import ir.siriusapps.sview.widget.Button;
+import ir.siriusapps.sview.widget.EditText;
 import ir.siriusapps.sview.widget.ImageView;
 import ir.siriusapps.sview.widget.Loading;
 
@@ -35,6 +36,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 button.setCorerRadius(2);
+            }
+        });
+
+        final EditText editText = findViewById(R.id.editText);
+        findViewById(R.id.textView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editText.setVisibility(View.GONE);
             }
         });
 

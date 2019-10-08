@@ -1,6 +1,7 @@
 package ir.siriusapps.sview.widget;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -11,8 +12,12 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.hardware.input.InputManager;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.view.inputmethod.InputMethodManager;
+
+import androidx.fragment.app.FragmentActivity;
 
 import ir.siriusapps.sview.R;
 import ir.siriusapps.sview.SView;

@@ -10,6 +10,8 @@
         <attr name="sview_color" format="string" />
         <attr name="sview_res" format="reference" />
         <attr name="sview_resSize" format="dimension" />
+        <attr name="sview_strokeColor" format="color" />
+        <attr name="sview_strokeWidth" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="SVGImageView">
