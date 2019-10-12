@@ -33,6 +33,7 @@ public class RelativeLayout extends android.widget.RelativeLayout implements Cor
 
     private Path basePath = new Path();
     private Paint clipPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private Paint strokePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private PorterDuffXfermode porterDuffXfermode = new PorterDuffXfermode(PorterDuff.Mode.CLEAR);
     private RectF rectF = new RectF();
     private int cornerRadius;
@@ -41,6 +42,8 @@ public class RelativeLayout extends android.widget.RelativeLayout implements Cor
     private int shadowColor = Color.parseColor("#80000000");
     private float shadowSize = 0;
     private float shadowDy = 0;
+    private int strokeWidth = 0;
+    private int strokeColor = Color.BLACK;
 
     public RelativeLayout(Context context) {
         super(context);
@@ -65,6 +68,8 @@ public class RelativeLayout extends android.widget.RelativeLayout implements Cor
             shadowColor = typedArray.getColor(R.styleable.SView_sview_shadowColor, shadowColor);
             shadowSize = typedArray.getDimensionPixelSize(R.styleable.SView_sview_shadowSize, (int) shadowSize);
             shadowDy = typedArray.getDimensionPixelSize(R.styleable.SView_sview_shadowDy, (int) shadowDy);
+            strokeColor = typedArray.getColor(R.styleable.SView_sview_strokeColor, strokeColor);
+            strokeWidth = typedArray.getDimensionPixelSize(R.styleable.SView_sview_strokeWidth, strokeWidth) * 2;
             typedArray.recycle();
         }
 
@@ -72,7 +77,13 @@ public class RelativeLayout extends android.widget.RelativeLayout implements Cor
 
         if (getBackground() instanceof ColorDrawable) {
             basePaint.setColor(((ColorDrawable) getBackground()).getColor());
+        } else {
+            basePaint.setColor(Color.TRANSPARENT);
         }
+
+        strokePaint.setColor(strokeColor);
+        strokePaint.setStyle(Paint.Style.STROKE);
+        strokePaint.setStrokeWidth(strokeWidth);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setClipToOutline(true);
@@ -121,6 +132,8 @@ public class RelativeLayout extends android.widget.RelativeLayout implements Cor
         Bitmap bitmap = Bitmap.createBitmap(w, h, Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         canvas.drawPath(basePath, basePaint);
+        if (strokeWidth > 0)
+            canvas.drawPath(basePath, strokePaint);
         setBackground(new BitmapDrawable(getResources(), bitmap));
     }
 

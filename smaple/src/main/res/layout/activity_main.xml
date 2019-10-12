@@ -137,4 +137,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
+    <ir.siriusapps.sview.widget.RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="94dp"
+        android:layout_height="94dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:sview_cornerRadius="16dp"
+        app:sview_strokeWidth="16dp">
+
+    </ir.siriusapps.sview.widget.RelativeLayout>
+
+    <View
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintStart_toStartOf="@+id/relativeLayout"
+        app:layout_constraintTop_toTopOf="@+id/relativeLayout">
+
+    </View>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
