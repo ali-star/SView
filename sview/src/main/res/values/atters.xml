@@ -7,7 +7,7 @@
         <attr name="sview_shadowSize" format="dimension" />
         <attr name="sview_shadowDy" format="dimension" />
         <attr name="sview_typeface" format="string" />
-        <attr name="sview_color" format="string" />
+        <attr name="sview_color" format="color" />
         <attr name="sview_res" format="reference" />
         <attr name="sview_resSize" format="dimension" />
         <attr name="sview_strokeColor" format="color" />
