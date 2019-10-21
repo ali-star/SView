@@ -142,17 +142,20 @@ public class RelativeLayout extends android.widget.RelativeLayout implements Cor
         if (shadowSize > 0) {
             int widthSize = MeasureSpec.getSize(widthMeasureSpec) + (int) shadowSize * 2;
 
-            int i = Utils.dipToPix(74);
-            int w = MeasureSpec.getSize(widthMeasureSpec);
             int h = MeasureSpec.getSize(heightMeasureSpec);
 
-            String hs = String.valueOf(h);
+            if (MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.AT_MOST)
+                h = 0;
 
             int topOffset = (int) (shadowSize - shadowDy);
             int heightSize = h + (int) ((topOffset > 0 ? topOffset : 0) + shadowSize + shadowDy);
 
             widthMeasureSpec = MeasureSpec.makeMeasureSpec(widthSize, MeasureSpec.EXACTLY);
-            heightMeasureSpec = MeasureSpec.makeMeasureSpec(heightSize, MeasureSpec.EXACTLY);
+
+            if (h == 0)
+                heightMeasureSpec = MeasureSpec.makeMeasureSpec(heightSize, MeasureSpec.UNSPECIFIED);
+            else
+                heightMeasureSpec = MeasureSpec.makeMeasureSpec(h, MeasureSpec.EXACTLY);
 
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         } else {

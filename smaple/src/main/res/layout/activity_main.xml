@@ -22,59 +22,6 @@
         android:src="@drawable/avatar"
         android:focusable="true" />
 
-    <ir.siriusapps.sview.widget.TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ir.siriusapps.sview.widget.Button
-        android:id="@+id/view"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/colorPrimary"
-        android:paddingBottom="8dp"
-        android:text="ورود"
-        android:textColor="#FFFFFF"
-        android:textSize="23sp"
-        app:layout_constraintEnd_toEndOf="@+id/text"
-        app:layout_constraintStart_toStartOf="@+id/text"
-        app:layout_constraintTop_toBottomOf="@+id/text"
-        app:sview_cornerRadius="8dp"
-        app:sview_strokeColor="#000000"
-        app:sview_strokeWidth="3dp">
-
-    </ir.siriusapps.sview.widget.Button>
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="100dp"
-        android:layout_height="48dp"
-        android:background="#000000"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
-
-    <ir.siriusapps.sview.widget.EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:background="#FFFFFF"
-        android:ems="10"
-        android:padding="8dp"
-        android:inputType="textPersonName"
-        app:sview_cornerRadius="16dp"
-        android:text="Name"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/view2"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toBottomOf="@+id/view2" />
-
     <ir.siriusapps.sview.widget.Loading
         android:id="@+id/loadingView"
         android:layout_width="48dp"
@@ -105,14 +52,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loadingView"
         app:al_arcDirection="top"
-        app:al_arcSize="74dp">
+        app:al_arcSize="74dp"/>
+
+    <ir.siriusapps.sview.widget.RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/shapeView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:sview_cornerRadius="12dp"
+        android:background="@color/colorPrimary"
+        app:sview_shadowSize="8dp"
+        app:sview_shadowColor="#50000000"
+        android:layout_marginTop="36dp">
 
         <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimaryDark" />
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:background="#FFF"/>
 
-    </ir.siriusapps.sview.widget.ArcLayout>
+        <View
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:background="#FFF"/>
+
+    </ir.siriusapps.sview.widget.RelativeLayout>
 
     <ir.siriusapps.sview.widget.TextView
         android:id="@+id/textView"
@@ -136,28 +102,5 @@
         android:text="Name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
-
-    <ir.siriusapps.sview.widget.RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="94dp"
-        android:layout_height="94dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:sview_cornerRadius="16dp"
-        app:sview_strokeWidth="16dp">
-
-    </ir.siriusapps.sview.widget.RelativeLayout>
-
-    <View
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
-        app:layout_constraintStart_toStartOf="@+id/relativeLayout"
-        app:layout_constraintTop_toTopOf="@+id/relativeLayout">
-
-    </View>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

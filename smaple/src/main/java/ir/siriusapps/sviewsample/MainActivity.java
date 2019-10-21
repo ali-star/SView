@@ -19,8 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         /*ImageView imageView = findViewById(R.id.imageView2);
         SVG svg = SVGParser.getSVGFromResource(getResources(), R.raw.icon);
-        imageView.setImageDrawable(svg.createPictureDrawable());
-        */
+        imageView.setImageDrawable(svg.createPictureDrawable());*/
 
         final ImageView svgView = findViewById(R.id.imageView2);
         svgView.setSvgResource(R.raw.menu);
@@ -30,22 +29,6 @@ public class MainActivity extends AppCompatActivity {
                 svgView.setSvgResource(R.raw.icon, Color.parseColor("#999999"));
             }
         }, 1500);
-
-        final Button button = findViewById(R.id.view);
-        findViewById(R.id.view).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                button.setCorerRadius(2);
-            }
-        });
-
-        final EditText editText = findViewById(R.id.editText);
-        findViewById(R.id.textView).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editText.setVisibility(View.GONE);
-            }
-        });
 
         final Loading loading = findViewById(R.id.loadingView);
 
