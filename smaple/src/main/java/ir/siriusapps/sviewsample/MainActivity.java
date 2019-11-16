@@ -21,14 +21,14 @@ public class MainActivity extends AppCompatActivity {
         SVG svg = SVGParser.getSVGFromResource(getResources(), R.raw.icon);
         imageView.setImageDrawable(svg.createPictureDrawable());*/
 
-        final ImageView svgView = findViewById(R.id.imageView2);
+        /*final ImageView svgView = findViewById(R.id.imageView2);
         svgView.setSvgResource(R.raw.menu);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 svgView.setSvgResource(R.raw.icon, Color.parseColor("#999999"));
             }
-        }, 1500);
+        }, 1500);*/
 
         final Loading loading = findViewById(R.id.loadingView);
 
