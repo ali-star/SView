@@ -211,4 +211,14 @@ public class Button extends android.widget.Button implements CornerView {
         Typeface typeface = TypefaceManager.getInstance().getTypeface(path, getContext());
         setTypeface(typeface);
     }
+
+    public void setStrokeColor(int strokeColor) {
+        this.strokeColor = strokeColor;
+        invalidate();
+    }
+
+    public void setStrokeWidth(int strokeWidth) {
+        this.strokeWidth = strokeWidth;
+        invalidate();
+    }
 }
